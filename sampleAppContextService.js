@@ -37,8 +37,8 @@ angular.module('sampleCaliperApp')
       return actor;
     };
 
-    var ePub = {};
     // Get the current Reading
+    var ePub = {};
     var getReading = function() {
       ePub = new Caliper.Entities.EPubVolume("https://github.com/readium/readium-js-viewer/book/34843#epubcfi(/4/3)");
       // ePub.setResourceType("EPUB_VOLUME");
@@ -70,8 +70,8 @@ angular.module('sampleCaliperApp')
       return edApp;
     };
 
-    var org = {};
     // Get the current Course
+    var org = {};
     var getCourse = function() {
       org = new Caliper.Entities.CourseSection("https://example.edu/deptOfPhysics/2014/physics101");
       org.setCourseNumber("Phy-101");
@@ -85,7 +85,21 @@ angular.module('sampleCaliperApp')
       return org;
     };
 
-    // Get Web Page for current Course
+    // Get the membership 
+    var getMembership = function() { 
+      var membership = new Caliper.Entities.Membership("https://example.edu/deptOfPhysics/2014/physics101/roster/554433"); 
+      membership.setDescription("Roster entry"); 
+      var member = getUser();
+      membership.setMember(member['@id']); 
+      var course = getCourse();
+      membership.setOrganization(course['@id']); 
+      membership.setRoles([Caliper.Entities.Role.LEARNER]); 
+      membership.setStatus(Caliper.Entities.Status.ACTIVE); 
+      membership.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString()); 
+      return membership; 
+    };
+
+      // Get Web Page for current Course
     var getCourseHomePage = function() {
       var courseHomePage = new Caliper.Entities.WebPage("Physics101-Course-Homepage");
       courseHomePage.setName("Physics101-Course-Homepage");
@@ -131,6 +145,7 @@ angular.module('sampleCaliperApp')
       getReadingFrame: getReadingFrame,
       getEdApp: getEdApp,
       getCourse: getCourse,
+      getMembership: getMembership,
       getCourseHomePage: getCourseHomePage,
       getQuiz: getQuiz
     };
