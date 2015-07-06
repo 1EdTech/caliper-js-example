@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="sampleCaliperApp">
+
+<head lang="en">
+  <meta charset="utf-8">
+  <title>IMS Caliper Analytics&trade; Sample Application</title>
+
+  <!-- required libraries and CSS -->
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.min.js"></script>
+
+  <!-- caliper-js -->
+  <script src="http://www.imsglobal.org/caliper/caliperSensor-0.9.6.js"></script>
+
+  <!-- Plunkr JS and CSS -->
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js"></script>
+  <script src="sampleAppContextService.js"></script>
+  <script src="sampleAppSensorService.js"></script>
+</head>
+
+<body ng-controller="sampleAppCtrl">
+
+  <!-- Set up the Course Tabs -->
+  <div class="container-fluid">
+    <ul class="nav nav-tabs">
+      <li role="presentation" ng-class="syllabusActive ? 'active' : 'inactive'"><a ng-click="setSyllabusActive()">Course Home</a>
+      </li>
+      <li role="presentation" ng-class="readingActive ? 'active' : 'inactive'"><a ng-click="setReadingActive()">Reading</a>
+      </li>
+      <li role="presentation" ng-class="quizActive ? 'active' : 'inactive'"><a ng-click="setQuizActive()">Quiz</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container-fluid">
+    <div ng-show="syllabusActive">
+      <h3>Course Syllabus</h3>
+      <div class="btn-group-vertical" role="group" aria-label="...">
+        <a ng-click="setReadingActive()">Complete Reading</a>
+        <br/>
+        <a ng-click="setQuizActive()">Take a Quiz</a>
+      </div>
+    </div>
+    <div ng-show="readingActive">
+      <h3>Reading</h3>
+      <h5>States of Matter</h5>
+      <p>
+        In physics, a state of matter is one of the distinct forms that matter takes on. Four states of matter are observable in everyday life: solid, liquid, gas, and plasma. Many other states are known such as Bose–Einstein condensates and neutron-degenerate matter but these only occur in extreme situations such as ultra cold or ultra dense matter. Other states, such as quark–gluon plasmas, are believed to be possible but remain theoretical for now. For a complete list of all exotic states of matter, see the list of states of matter.
+      </p>
+      <p>
+        Historically, the distinction is made based on qualitative differences in properties. Matter in the solid state maintains a fixed volume and shape, with component particles (atoms, molecules or ions) close together and fixed into place. Matter in the liquid state maintains a fixed volume, but has a variable shape that adapts to fit its container. Its particles are still close together but move freely. Matter in the gaseous state has both variable volume and shape, adapting both to fit its container. Its particles are neither close together nor fixed in place. Matter in the plasma state has variable volume and shape, but as well as neutral atoms, it contains a significant number of ions and electrons, both of which can move around freely. Plasma is the most common form of visible matter in the universe.[1]
+      </p>
+      <br>
+      <br>
+      <form name="tagsForm" class="form-inline">
+        <div class="form-group">
+          <label for="tag">Enter Tag</label>
+          <input type="text" class="form-control" ng-model="currentTag" id="tag" placeholder="-- enter tag --">
+        </div>
+        <button ng-click="addTag()" class="btn btn-default">Add</button>
+      </form>
+      <br>
+      <br>
+      <span>My Tags = {{readingTags}}</span>
+    </div>
+    <div ng-show="quizActive">
+      <h3>Quiz</h3>
+      <h5>States of Matter</h5>
+      Which one of these is not a valid state of matter?
+      <form name="myForm" ng-show="quizActive">
+        <input type="checkbox" ng-model="plasma">Liquid
+        <br/>
+        <input type="checkbox" ng-model="solid">Solid
+        <br/>
+        <input type="checkbox" ng-model="correctAnswer">Plasmoid
+        <br/>
+        <input type="checkbox" ng-model="gas">Gas
+        <br/>
+        <br/>
+      </form>
+      <button ng-click="submitQuiz()">
+        Submit
+      </button>
+      <button ng-click="retakeQuiz()">
+        Reset
+      </button>
+      <br>
+      <br>
+      <span ng-show="quizSubmitted">Message = You answered correctly {{correctAnswer}}</span>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="container-fluid">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Last Caliper Event: {{ currentEventType }}</h3>
+      </div>
+      <div class="panel-body">
+        <pre>{{ currentEvent | json }}</pre>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+dist/*
+node_modules
+doc/*
+
+# Intellij
+.idea/
+*.iml
+*.ipr
+*.iws
+*.uml
+out/
