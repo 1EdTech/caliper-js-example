@@ -205,14 +205,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var action = Caliper.Actions.AnnotationActions.TAGGED;
 
       // The Object being interacted with by the Actor
-      var eventObj = new Caliper.Entities.TagAnnotation("https://imsglobal.org/sampleCaliperApp/tags/7654");
-      // eventObj.setAnnotationType("TAG_ANNOTATION");
-      eventObj.setDateCreated(1402965614516);
-      eventObj.setDateModified(1402965618516);
-      eventObj.setTags(tags);
+      var eventObj = sampleAppSensorService.readingFrame;
 
-      // The target object (frame) within the Event Object
-      var targetObj = sampleAppSensorService.readingFrame;
+      // The generated object (Tag annotation)
+      var generatedAnnotation = new Caliper.Entities.TagAnnotation("https://imsglobal.org/sampleCaliperApp/tags/7654");
+      generatedAnnotation.setTags(tags);
+      generatedAnnotation.setDateCreated(new Date().getTime());
 
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
@@ -220,7 +218,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The LIS Course Section for the Event (part of Learning Context)
       var course = sampleAppSensorService.course;
 
-      // Event starteAtTime
+      // Event startedAtTime
       var currentTimeMillis = (new Date()).getTime();
 
       // Create the Annotation Event
@@ -228,7 +226,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       tagAnnotationEvent.setActor(actor);
       tagAnnotationEvent.setAction(action);
       tagAnnotationEvent.setObject(eventObj);
-      tagAnnotationEvent.setTarget(targetObj);
+      tagAnnotationEvent.setGenerated(generatedAnnotation);
       tagAnnotationEvent.setEdApp(edApp);
       tagAnnotationEvent.setGroup(course);
       tagAnnotationEvent.setStartedAtTime(currentTimeMillis);
@@ -257,7 +255,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The target object (frame) within the Event Object
       var targetObj = null;
 
-      // Event starteAtTime
+      // Event startedAtTime
       var currentTimeMillis = (new Date()).getTime();
 
       // The generated object (Attempt) within the Event Object
