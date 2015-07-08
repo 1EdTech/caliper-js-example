@@ -256,9 +256,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The Object being interacted with by the Actor
       var obj = sampleAppSensorService.quiz;
 
-      // Event startedAtTime
-      //var currentTimeMillis = (new Date()).getTime();
-
       // The generated object (Attempt) within the Event Object
       var generated = new Caliper.Entities.Attempt("https://some-university.edu/deptOfPhysics/2014/physics101/assessment1/attempt1");
       generated.setName(null);
