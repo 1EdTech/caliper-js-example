@@ -27,36 +27,51 @@
 angular.module('sampleCaliperApp')
   .service('sampleAppContextService', function() {
 
+    /**
+     * Decrement date by n days in order to create faux historical dates for entities.
+     * @param date
+     * @param decrement
+     */
+    var decrementDate = function(date, decrement) {
+      date.setDate(date.getDate() - decrement);
+      return date.toISOString();
+    };
+
+    /**
+     * Increment date by n days in order to create faux future dates for entities
+     * @param date
+     * @param increment
+     */
+    var incrementDate = function(date, increment) {
+      date.setDate(date.getDate() + increment);
+      return date.toISOString();
+    };
+
     // Get the current user as a Caliper Actor
     var getUser = function() {
-      var currentUserId = "https://example.edu/user/554433";
-      // The Actor for the Learning Event
-      var actor = new Caliper.Entities.Person(currentUserId);
-      actor.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString());
-      actor.setDateModified((new Date("2015-08-01T06:00:00Z")).toISOString());
+      var actor = new Caliper.Entities.Person("https://example.edu/user/554433");
+      actor.setDateCreated(decrementDate(new Date(), 45));
       return actor;
     };
 
-    var ePub = {};
     // Get the current Reading
+    var ePub = {};
     var getReading = function() {
       ePub = new Caliper.Entities.EPubVolume("https://github.com/readium/readium-js-viewer/book/34843#epubcfi(/4/3)");
-      // ePub.setResourceType("EPUB_VOLUME");
       ePub.setName("States of Matter - A Condensed History");
       ePub.setVersion("1.0");
-      ePub.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString());
-      ePub.setDateModified((new Date("2015-08-01T06:00:00Z")).toISOString());
+      ePub.setDateCreated(decrementDate(new Date(), 14));
+      ePub.setDateModified(decrementDate(new Date(), 7));
       return ePub;
     };
 
     var getReadingFrame = function() {
       var ePubFrame = new Caliper.Entities.Frame("https://github.com/readium/readium-js-viewer/book/frame/34843#epubcfi(/4/3/1)");
-      // ePubFrame.setResourceType("FRAME");
       ePubFrame.setName("Introduction to the states of matter");
       ePubFrame.setIndex(1);
       ePubFrame.setIsPartOf(ePub);
       ePubFrame.setVersion(ePub.version);
-      ePubFrame.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString());
+      ePubFrame.setDateCreated(ePub.dateCreated);
       ePubFrame.setDateModified(ePub.dateModified);
       return ePubFrame;
     };
@@ -65,13 +80,12 @@ angular.module('sampleCaliperApp')
     var getEdApp = function() {
       var edApp = new Caliper.Entities.SoftwareApplication("https://imsglobal.org/sampleCaliperApp");
       edApp.setName("Sample Caliper App");
-      edApp.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString());
-      edApp.setDateModified((new Date("2015-08-01T06:00:00Z")).toISOString());
+      edApp.setDateCreated(decrementDate(new Date(), 30));
       return edApp;
     };
 
-    var org = {};
     // Get the current Course
+    var org = {};
     var getCourse = function() {
       org = new Caliper.Entities.CourseSection("https://example.edu/deptOfPhysics/2014/physics101");
       org.setCourseNumber("Phy-101");
@@ -80,18 +94,33 @@ angular.module('sampleCaliperApp')
       org.setName("American Revolution 101");
       org.setCourseNumber("POL101");
       org.setAcademicSession("Fall-2015");
-      org.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString());
-      org.setDateModified((new Date("2015-08-01T06:00:00Z")).toISOString());
+      org.setDateCreated(decrementDate(new Date(), 30));
+      org.setDateModified(decrementDate(new Date(), 28));
       return org;
     };
 
-    // Get Web Page for current Course
+    // Get the membership 
+    var getMembership = function() {
+      var member = getUser();
+      var course = getCourse();
+
+      var membership = new Caliper.Entities.Membership("https://example.edu/deptOfPhysics/2014/physics101/roster/554433"); 
+      membership.setDescription("Roster entry"); 
+      membership.setMember(member['@id']); 
+      membership.setOrganization(course['@id']); 
+      membership.setRoles([Caliper.Entities.Role.LEARNER]); 
+      membership.setStatus(Caliper.Entities.Status.ACTIVE); 
+      membership.setDateCreated(decrementDate(new Date(), 21)); 
+      return membership; 
+    };
+
+      // Get Web Page for current Course
     var getCourseHomePage = function() {
       var courseHomePage = new Caliper.Entities.WebPage("Physics101-Course-Homepage");
       courseHomePage.setName("Physics101-Course-Homepage");
       courseHomePage.setIsPartOf(org);
-      courseHomePage.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString());
-      courseHomePage.setDateModified((new Date("2015-08-01T06:00:00Z")).toISOString());
+      courseHomePage.setDateCreated(decrementDate(new Date(), 28));
+      courseHomePage.setDateModified(decrementDate(new Date(), 25));
       return courseHomePage;
     };
 
@@ -100,13 +129,13 @@ angular.module('sampleCaliperApp')
       var quiz = new Caliper.Entities.Assessment("https://example.edu/deptOfPhysics/2014/physics101/assessment1");
       quiz.setName("States of Matter - Assessment");
       quiz.setIsPartOf("https://some-university.edu/deptOfPhysics/2014/physics101");
-      quiz.setDateModified((new Date("2015-02-02T11:30:00Z")).toISOString());
-      quiz.setDateCreated((new Date("2015-01-01T06:00:00Z")).toISOString());
-      quiz.setDatePublished((new Date("2015-01-15T09:30:00Z")).toISOString());
-      quiz.setDateToActivate((new Date("2015-01-16T05:00:00Z")).toISOString());
-      quiz.setDateToShow((new Date("2015-01-16T05:00:00Z")).toISOString());
-      quiz.setDateToStartOn((new Date("2015-01-16T05:00:00Z")).toISOString());
-      quiz.setDateToSubmit((new Date("2015-02-28T11:59:59Z")).toISOString());
+      quiz.setDateCreated(decrementDate(new Date(), 28));
+      quiz.setDateModified(decrementDate(new Date(), 27));
+      quiz.setDatePublished(decrementDate(new Date(), 14));
+      quiz.setDateToActivate(decrementDate(new Date(), 13));
+      quiz.setDateToShow(decrementDate(new Date(), 12));
+      quiz.setDateToStartOn(incrementDate(new Date(), 7));
+      quiz.setDateToSubmit(incrementDate(new Date(), 14));
       quiz.setMaxAttempts(2);
       quiz.setMaxSubmits(2);
       quiz.setMaxScore(3.0);
@@ -118,8 +147,8 @@ angular.module('sampleCaliperApp')
       assessmentItem1.setMaxAttempts(2);
       assessmentItem1.setMaxSubmits(2);
       assessmentItem1.setMaxScore(1.0);
-      assessmentItem1.setDateCreated((new Date("2015-08-01T06:00:00Z")).toISOString());
-      assessmentItem1.setDateModified((new Date("2015-08-01T06:00:00Z")).toISOString());
+      assessmentItem1.setDateCreated(quiz.dateCreated);
+      assessmentItem1.setDateModified(quiz.dateModified);
 
       return quiz;
     };
@@ -131,6 +160,7 @@ angular.module('sampleCaliperApp')
       getReadingFrame: getReadingFrame,
       getEdApp: getEdApp,
       getCourse: getCourse,
+      getMembership: getMembership,
       getCourseHomePage: getCourseHomePage,
       getQuiz: getQuiz
     };

@@ -67,6 +67,7 @@ angular.module('sampleCaliperApp')
       readingFrame: sampleAppContextService.getReadingFrame(),
       edApp: sampleAppContextService.getEdApp(),
       course: sampleAppContextService.getCourse(),
+      membership: sampleAppContextService.getMembership(),
       courseHomePage: sampleAppContextService.getCourseHomePage(),
       quiz: sampleAppContextService.getQuiz()
     };
