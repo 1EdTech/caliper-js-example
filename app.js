@@ -254,7 +254,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var action = Caliper.Actions.AssessmentActions.STARTED;
 
       // The Object being interacted with by the Actor
-      var object = sampleAppSensorService.quiz;
+      var obj = sampleAppSensorService.quiz;
 
       // Event startedAtTime
       //var currentTimeMillis = (new Date()).getTime();
@@ -264,7 +264,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       generated.setName(null);
       generated.setDescription(null);
       generated.setActor(actor['@id']);
-      generated.setAssignable(object['@id']);
+      generated.setAssignable(obj['@id']);
       generated.setDateCreated(new Date().toISOString());
       generated.setDateModified(null);
       generated.setCount(1);
@@ -288,7 +288,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var event = new Caliper.Events.AssessmentEvent();
       event.setActor(actor);
       event.setAction(action);
-      event.setObject(object);
+      event.setObject(obj);
       event.setGenerated(generated);
       event.setEdApp(edApp);
       event.setGroup(group);
