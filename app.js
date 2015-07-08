@@ -108,44 +108,46 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var action = Caliper.Actions.SessionActions.LOGGED_IN;
 
       // The Object being interacted with by the Actor (edApp)
-      var edApp = sampleAppSensorService.edApp;
-
-      // Event starteAtTime
-      var currentTimeMillis = (new Date()).getTime();
+      var obj = sampleAppSensorService.edApp;
 
       // The generated object (Session) within the Event Object
-      var generatedSession = new Caliper.Entities.Session("https://imsglobal.org/sampleCaliperApp//session-123456789");
-      generatedSession.setName("session-123456789");
-      generatedSession.setDescription(null);
-      generatedSession.setActor(actor);
-      generatedSession.setStartedAtTime(currentTimeMillis);
-      generatedSession.setEndedAtTime(null);
-      generatedSession.setDuration(null);
-      generatedSession.setDateCreated(currentTimeMillis);
+      var generated = new Caliper.Entities.Session("https://imsglobal.org/sampleCaliperApp//session-123456789");
+      generated.setName("session-123456789");
+      generated.setDescription(null);
+      generated.setActor(actor);
+      var sessionStart = new Date().toISOString();
+      generated.setDateCreated(sessionStart);
+      generated.setStartedAtTime(sessionStart);
+      generated.setEndedAtTime(null);
+      generated.setDuration(null);
 
       // The edApp that is part of the Learning Context
-      // var edApp = sampleAppSensorService.edApp;
+      var edApp = obj;
 
       // The LIS Course Section for the Event (part of Learning Context)
-      var course = sampleAppSensorService.course;
+      var group = sampleAppSensorService.course;
+
+      // The actor's membership, roles and status
+      var membership = sampleAppSensorService.membership;
 
       // Create the Session Event (Uncomment and set references to objects)
-      var sessionEvent = new Caliper.Events.SessionEvent();
-      sessionEvent.setActor(actor);
-      sessionEvent.setAction(action);
-      sessionEvent.setObject(edApp);
-      sessionEvent.setGenerated(generatedSession);
-      sessionEvent.setGroup(course);
-      sessionEvent.setEdApp(edApp);
-      sessionEvent.setStartedAtTime(currentTimeMillis);
+      var event = new Caliper.Events.SessionEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(obj);
+      event.setGenerated(generated);
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setMembership(membership);
+      event.setStartedAtTime(new Date().toISOString());
 
-      // console.log('created session event %O', sessionEvent);
+      // console.log('created session event %O', event);
 
       $scope.currentEventType = 'Session Event (LOGGED IN)';
-      $scope.currentEvent = sessionEvent;
+      $scope.currentEvent = event;
 
       // Send the event (check RequestBin for event JSON)
-      sampleAppSensorService.send(sessionEvent);
+      sampleAppSensorService.send(event);
     };
 
     // Navigation Event
@@ -158,41 +160,42 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var action = Caliper.Actions.ReadingActions.NAVIGATED_TO;
 
       // The Object (Reading) being interacted with by the Actor
-      var eventObj = sampleAppSensorService.reading;
+      var obj = sampleAppSensorService.reading;
 
       // The target object (frame) within the Event Object
-      var targetObj = sampleAppSensorService.readingFrame;
+      var target = sampleAppSensorService.readingFrame;
 
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
 
       // The LIS Course Section for the Event (part of Learning Context)
-      var course = sampleAppSensorService.course;
+      var group = sampleAppSensorService.course;
+
+      // The actor's membership, roles and status
+      var membership = sampleAppSensorService.membership;
 
       // Specific to the Navigation Event - the location where the user navigated from
-      var navigatedFromObj = sampleAppSensorService.courseHomePage;
-
-      // Event starteAtTime
-      var currentTimeMillis = (new Date()).getTime();
+      var navigatedFrom = sampleAppSensorService.courseHomePage;
 
       // Create the Navigation Event
-      var navigationEvent = new Caliper.Events.NavigationEvent();
-      navigationEvent.setActor(actor);
-      navigationEvent.setAction(action);
-      navigationEvent.setObject(eventObj);
-      navigationEvent.setTarget(targetObj);
-      navigationEvent.setEdApp(edApp);
-      navigationEvent.setGroup(course);
-      navigationEvent.setStartedAtTime(currentTimeMillis);
-      navigationEvent.setNavigatedFrom(navigatedFromObj);
+      var event = new Caliper.Events.NavigationEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(obj);
+      event.setTarget(target);
+      event.setNavigatedFrom(navigatedFrom);
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setMembership(membership);
+      event.setStartedAtTime(new Date().toISOString());
 
-      console.log('created navigation event %O', navigationEvent);
+      // console.log('created navigation event %O', event);
 
       $scope.currentEventType = 'Navigation Event';
-      $scope.currentEvent = navigationEvent;
+      $scope.currentEvent = event;
 
       // Send the event (check RequestBin for event JSON)
-      sampleAppSensorService.send(navigationEvent);
+      sampleAppSensorService.send(event);
     };
 
     // Annotation Event
@@ -205,39 +208,40 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var action = Caliper.Actions.AnnotationActions.TAGGED;
 
       // The Object being interacted with by the Actor
-      var eventObj = sampleAppSensorService.readingFrame;
+      var obj = sampleAppSensorService.readingFrame;
 
       // The generated object (Tag annotation)
-      var generatedAnnotation = new Caliper.Entities.TagAnnotation("https://imsglobal.org/sampleCaliperApp/tags/7654");
-      generatedAnnotation.setTags(tags);
-      generatedAnnotation.setDateCreated(new Date().getTime());
+      var generated = new Caliper.Entities.TagAnnotation("https://imsglobal.org/sampleCaliperApp/tags/7654");
+      generated.setTags(tags);
+      generated.setDateCreated(new Date().toISOString());
 
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
 
       // The LIS Course Section for the Event (part of Learning Context)
-      var course = sampleAppSensorService.course;
+      var group = sampleAppSensorService.course;
 
-      // Event startedAtTime
-      var currentTimeMillis = (new Date()).getTime();
+      // The actor's membership, roles and status
+      var membership = sampleAppSensorService.membership;
 
       // Create the Annotation Event
-      var tagAnnotationEvent = new Caliper.Events.AnnotationEvent();
-      tagAnnotationEvent.setActor(actor);
-      tagAnnotationEvent.setAction(action);
-      tagAnnotationEvent.setObject(eventObj);
-      tagAnnotationEvent.setGenerated(generatedAnnotation);
-      tagAnnotationEvent.setEdApp(edApp);
-      tagAnnotationEvent.setGroup(course);
-      tagAnnotationEvent.setStartedAtTime(currentTimeMillis);
+      var event = new Caliper.Events.AnnotationEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(obj);
+      event.setGenerated(generated);
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setMembership(membership);
+      event.setStartedAtTime(new Date().toISOString());
 
-      console.log('created annotation event %O', tagAnnotationEvent);
+      console.log('created annotation event %O', event);
 
       $scope.currentEventType = 'Annotation Event';
-      $scope.currentEvent = tagAnnotationEvent;
+      $scope.currentEvent = event;
 
       // Send the event (check RequestBin for event JSON)
-      sampleAppSensorService.send(tagAnnotationEvent);
+      sampleAppSensorService.send(event);
     };
 
     // Quiz Start Event
@@ -250,59 +254,60 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var action = Caliper.Actions.AssessmentActions.STARTED;
 
       // The Object being interacted with by the Actor
-      var quizObject = sampleAppSensorService.quiz;
-
-      // The target object (frame) within the Event Object
-      var targetObj = null;
+      var object = sampleAppSensorService.quiz;
 
       // Event startedAtTime
-      var currentTimeMillis = (new Date()).getTime();
+      //var currentTimeMillis = (new Date()).getTime();
 
       // The generated object (Attempt) within the Event Object
-      var generatedAttempt = new Caliper.Entities.Attempt("https://some-university.edu/deptOfPhysics/2014/physics101/assessment1/attempt1");
-      generatedAttempt.setName(null);
-      generatedAttempt.setDescription(null);
-      generatedAttempt.setActor(actor['@id']);
-      generatedAttempt.setAssignable(quizObject['@id']);
-      generatedAttempt.setDateCreated(currentTimeMillis);
-      generatedAttempt.setDateModified(null);
-      generatedAttempt.setCount(1);
-      generatedAttempt.setStartedAtTime(currentTimeMillis);
-      generatedAttempt.setEndedAtTime(null);
-      generatedAttempt.setDuration(null);
+      var generated = new Caliper.Entities.Attempt("https://some-university.edu/deptOfPhysics/2014/physics101/assessment1/attempt1");
+      generated.setName(null);
+      generated.setDescription(null);
+      generated.setActor(actor['@id']);
+      generated.setAssignable(object['@id']);
+      generated.setDateCreated(new Date().toISOString());
+      generated.setDateModified(null);
+      generated.setCount(1);
+      generated.setStartedAtTime(new Date().toISOString());
+      generated.setEndedAtTime(null);
+      generated.setDuration(null);
 
-      $scope.currentAttempt = generatedAttempt; // set so that submit quiz event can reference
+      // Assign to scope object so that the submit quiz event can reference it
+      $scope.currentAttempt = generated;
 
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
 
       // The LIS Course Section for the Event (part of Learning Context)
-      var course = sampleAppSensorService.course;
+      var group = sampleAppSensorService.course;
+
+      // The actor's membership, roles and status
+      var membership = sampleAppSensorService.membership;
 
       // Create the Assessment Event
-      var assessmentEvent = new Caliper.Events.AssessmentEvent();
-      assessmentEvent.setActor(actor);
-      assessmentEvent.setAction(action);
-      assessmentEvent.setObject(quizObject);
-      assessmentEvent.setTarget(targetObj);
-      assessmentEvent.setGenerated(generatedAttempt);
-      assessmentEvent.setEdApp(edApp);
-      assessmentEvent.setGroup(course);
-      assessmentEvent.setStartedAtTime(currentTimeMillis);
+      var event = new Caliper.Events.AssessmentEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(object);
+      event.setGenerated(generated);
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setMembership(membership);
+      event.setStartedAtTime(new Date().toISOString());
 
-      console.log('created assessment event %O', assessmentEvent);
+      // console.log('created assessment event %O', event);
 
       $scope.currentEventType = 'Assessment Event (STARTED)';
-      $scope.currentEvent = assessmentEvent;
+      $scope.currentEvent = event;
 
       // Send the event (check RequestBin for event JSON)
-      sampleAppSensorService.send(assessmentEvent);
+      sampleAppSensorService.send(event);
     };
 
     // BOOTCAMP EXERCISE # 2: Quiz Submit Event
     $scope.submitQuizToSensor = function() {
 
-      // Actor SUBMITTED Attempt for Quiz
+      // Actor SUBMITTED Quiz Attempt
 
       // The Actor for the Caliper Event 
       var actor = sampleAppSensorService.currentUser;
@@ -310,105 +315,84 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The Action for the Caliper Event (Hint: Use AssessmentActions)
       var action = Caliper.Actions.AssessmentActions.SUBMITTED;
 
-      // The target object within the Event Object (Hint: Current Quiz)
-      var quizObject = sampleAppSensorService.quiz;
+      // The object (Attempt) being submitted
+      var obj = $scope.currentAttempt;
+      obj.setEndedAtTime(new Date().toISOString());
+      $scope.currentAttempt = obj;
 
-      // The generated object (Attempt) within the Event Object
-      var generatedAttempt = new Caliper.Entities.Attempt("https://some-university.edu/deptOfPhysics/2014/physics101/assessment1/attempt1");
-      generatedAttempt.setName(null);
-      generatedAttempt.setDescription(null);
-      generatedAttempt.setActor(actor['@id']);
-      generatedAttempt.setAssignable(quizObject['@id']);
-      generatedAttempt.setDateCreated(currentTimeMillis);
-      generatedAttempt.setDateModified(null);
-      generatedAttempt.setCount(1);
-      generatedAttempt.setStartedAtTime(currentTimeMillis);
-      generatedAttempt.setEndedAtTime(null);
-      generatedAttempt.setDuration(null);
-
-      // The Object being interacted with by the Actor (Hint: CurrentAttempt)
-      var currentAttempt = generatedAttempt;
-
-      // Event starteAtTime
-      var currentTimeMillis = (new Date()).getTime();
+      // The target object
+      var target = obj.assignable;
 
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
 
       // The LIS Course Section for the Event (part of Learning Context)
-      var course = sampleAppSensorService.course;
+      var group = sampleAppSensorService.course;
+
+      // The actor's membership, roles and status
+      var membership = sampleAppSensorService.membership;
 
       // Create the Assessment Event (Uncomment and set references to objects)
-      var assessmentEvent = new Caliper.Events.AssessmentEvent();
-      assessmentEvent.setActor(actor);
-      assessmentEvent.setAction(action);
-      assessmentEvent.setObject(generatedAttempt);
-      assessmentEvent.setTarget(quizObject);
-      assessmentEvent.setEdApp(edApp);
-      assessmentEvent.setGroup(course);
-      assessmentEvent.setStartedAtTime(currentTimeMillis);
+      var event = new Caliper.Events.AssessmentEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(obj);
+      event.setTarget(target);
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setMembership(membership);
+      event.setStartedAtTime(new Date().toISOString());
 
-      // console.log('created assessment event %O', assessmentEvent);
+      // console.log('created assessment event %O', event);
 
       $scope.currentEventType = 'Assessment Event (SUBMITTED)';
-      $scope.currentEvent = assessmentEvent;
+      $scope.currentEvent = event;
 
       // Send the event (check RequestBin for event JSON)
-      sampleAppSensorService.send(assessmentEvent);
+      sampleAppSensorService.send(event);
     };
 
     $scope.gradeQuiz = function() {
       
-      console.log("##########Sending Outcome Event");
+      //console.log("Sending Outcome Event");
 
-      // The Actor for the Caliper Event 
+      // The Actor for the Caliper Event.  No Event.membership is set for this actor.
       var actor = sampleAppSensorService.edApp;
 
       // The Action for the Caliper Event (Hint: Use AssessmentActions)
       var action = Caliper.Actions.OutcomeActions.GRADED;
-      
-      var quizObject = sampleAppSensorService.quiz;
 
-      // The object (Attempt) within the Event Object
-      var generatedAttempt = new Caliper.Entities.Attempt("https://some-university.edu/deptOfPhysics/2014/physics101/assessment1/attempt1");
-      generatedAttempt.setName(null);
-      generatedAttempt.setDescription(null);
-      generatedAttempt.setActor(actor['@id']);
-      generatedAttempt.setAssignable(quizObject['@id']);
-      generatedAttempt.setDateCreated(currentTimeMillis);
-      generatedAttempt.setDateModified(null);
-      generatedAttempt.setCount(1);
-      generatedAttempt.setStartedAtTime(currentTimeMillis);
-      generatedAttempt.setEndedAtTime(null);
-      generatedAttempt.setDuration(null);
+      // The object (Attempt) being submitted
+      var obj = $scope.currentAttempt;
+
+      // The target object
+      var target = obj.assignable;
 
       // The generated object (Result)
-      var result = new Caliper.Entities.Result("http://some-university.edu/deptOfPhysics/2014/result/12345", "a fake type");
-
-      // Event starteAtTime
-      var currentTimeMillis = (new Date()).getTime();
+      var generated = new Caliper.Entities.Result("http://some-university.edu/deptOfPhysics/2014/result/12345", "a fake type");
 
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
 
       // The LIS Course Section for the Event (part of Learning Context)
-      var course = sampleAppSensorService.course;
+      var group = sampleAppSensorService.course;
 
       // The Outcome Event
-      var outcomeEvent = new Caliper.Events.OutcomeEvent();
-      outcomeEvent.setActor(actor);
-      outcomeEvent.setAction(action);
-      outcomeEvent.setObject(generatedAttempt);
-      outcomeEvent.setGenerated(result);
-      outcomeEvent.setEdApp(edApp);
-      outcomeEvent.setGroup(course);
-      outcomeEvent.setStartedAtTime(currentTimeMillis);
+      var event = new Caliper.Events.OutcomeEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(obj);
+      event.setTarget(target);
+      event.setGenerated(generated);
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setStartedAtTime(new Date().toISOString());
 
       $scope.currentEventType = 'Outcome Event (GRADED)';
-      $scope.currentEvent = outcomeEvent;
+      $scope.currentEvent = event;
 
       // Send the event (check RequestBin for event JSON)
-      sampleAppSensorService.send(outcomeEvent);
+      sampleAppSensorService.send(event);
     };
 
     $scope.init();
