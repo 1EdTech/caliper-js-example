@@ -157,7 +157,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       var actor = sampleAppSensorService.currentUser;
 
       // The Action for the Event
-      var action = Caliper.Actions.ReadingActions.NAVIGATED_TO;
+      var action = Caliper.Actions.NavigationActions.NAVIGATED_TO;
 
       // The Object (Reading) being interacted with by the Actor
       var obj = sampleAppSensorService.reading;
