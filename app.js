@@ -117,7 +117,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       generated.setActor(actor);
       var sessionStart = new Date().toISOString();
       generated.setDateCreated(sessionStart);
-      generated.setStartedAtTime(sessionStart);
+      generated.setStartedTime(sessionStart);
       generated.setEndedAtTime(null);
       generated.setDuration(null);
 
@@ -139,7 +139,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setEdApp(edApp);
       event.setGroup(group);
       event.setMembership(membership);
-      event.setStartedAtTime(new Date().toISOString());
+      event.setEventTime(new Date().toISOString());
 
       // console.log('created session event %O', event);
 
@@ -233,7 +233,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setEdApp(edApp);
       event.setGroup(group);
       event.setMembership(membership);
-      event.setStartedAtTime(new Date().toISOString());
+      event.setEventTime(new Date().toISOString());
 
       console.log('created annotation event %O', event);
 
@@ -290,7 +290,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setEdApp(edApp);
       event.setGroup(group);
       event.setMembership(membership);
-      event.setStartedAtTime(new Date().toISOString());
+      event.setEventTime(new Date().toISOString());
 
       // console.log('created assessment event %O', event);
 
@@ -338,7 +338,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setEdApp(edApp);
       event.setGroup(group);
       event.setMembership(membership);
-      event.setStartedAtTime(new Date().toISOString());
+      event.setEventTime(new Date().toISOString());
 
       // console.log('created assessment event %O', event);
 
@@ -383,7 +383,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setGenerated(generated);
       event.setEdApp(edApp);
       event.setGroup(group);
-      event.setStartedAtTime(new Date().toISOString());
+      event.setEventTime(new Date().toISOString());
 
       $scope.currentEventType = 'Outcome Event (GRADED)';
       $scope.currentEvent = event;
