@@ -90,9 +90,7 @@ angular.module('sampleCaliperApp')
       org = new Caliper.Entities.CourseSection("https://example.edu/deptOfPhysics/2014/physics101");
       org.setCourseNumber("Phy-101");
       org.setName("Introductory Physics");
-      org.setDescription("This is a Physics course for beginners.")
-      org.setName("American Revolution 101");
-      org.setCourseNumber("POL101");
+      org.setDescription("This is a Physics course for beginners.");
       org.setAcademicSession("Fall-2015");
       org.setDateCreated(decrementDate(new Date(), 30));
       org.setDateModified(decrementDate(new Date(), 28));
