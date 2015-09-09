@@ -187,7 +187,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setEdApp(edApp);
       event.setGroup(group);
       event.setMembership(membership);
-      event.setStartedAtTime(new Date().toISOString());
+      event.setEventTime(new Date().toISOString());
 
       // console.log('created navigation event %O', event);
 
