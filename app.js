@@ -117,7 +117,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       generated.setActor(actor);
       var sessionStart = new Date().toISOString();
       generated.setDateCreated(sessionStart);
-      generated.setStartedTime(sessionStart);
+      generated.setStartedAtTime(sessionStart);
       generated.setEndedAtTime(null);
       generated.setDuration(null);
 
