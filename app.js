@@ -361,7 +361,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The generated object (Result)
       var generated = new Caliper.Entities.Result(obj['@id'] + "/result/1235");
       generated.setActor(actor['@id']);
-      generated.setAssignable(obj.assignable['@id']);
+      generated.setAssignable(obj.assignable);
       generated.setDateCreated(new Date().toISOString());
       generated.setNormalScore(1.0); // TODO Render score dynamic
       generated.setPenaltyScore(0.0);
