@@ -317,9 +317,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       obj.setEndedAtTime(new Date().toISOString());
       $scope.currentAttempt = obj;
 
-      // The target object
-      var target = obj.assignable;
-
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
 
@@ -334,7 +331,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setActor(actor);
       event.setAction(action);
       event.setObject(obj);
-      event.setTarget(target);
       event.setEdApp(edApp);
       event.setGroup(group);
       event.setMembership(membership);
@@ -353,7 +349,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       
       //console.log("Sending Outcome Event");
 
-      // The Actor for the Caliper Event.  No Event.membership is set for this actor.
+      // The Actor/Scorer for the Caliper Event.  No Event.membership is set for this actor.
       var actor = sampleAppSensorService.edApp;
 
       // The Action for the Caliper Event (Hint: Use AssessmentActions)
@@ -362,14 +358,19 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The object (Attempt) being submitted
       var obj = $scope.currentAttempt;
 
-      // The target object
-      var target = obj.assignable;
-
       // The generated object (Result)
-      var generated = new Caliper.Entities.Result("http://some-university.edu/deptOfPhysics/2014/result/12345", "a fake type");
-
-      // The edApp that is part of the Learning Context
-      var edApp = sampleAppSensorService.edApp;
+      var generated = new Caliper.Entities.Result(obj['@id'] + "/result/1235");
+      generated.setActor(actor['@id']);
+      generated.setAssignable(obj.assignable['@id']);
+      generated.setDateCreated(new Date().toISOString());
+      generated.setNormalScore(1.0); // TODO Render score dynamic
+      generated.setPenaltyScore(0.0);
+      generated.setExtraCreditScore(0.0);
+      generated.setTotalScore(1.0);
+      generated.setCurvedTotalScore(1.0);
+      generated.setCurveFactor(0.0);
+      generated.setComment("Caliper rocks!");
+      generated.setScoredBy(actor);
 
       // The LIS Course Section for the Event (part of Learning Context)
       var group = sampleAppSensorService.course;
@@ -379,9 +380,8 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setActor(actor);
       event.setAction(action);
       event.setObject(obj);
-      event.setTarget(target);
       event.setGenerated(generated);
-      event.setEdApp(edApp);
+      event.setEdApp(actor);
       event.setGroup(group);
       event.setEventTime(new Date().toISOString());
 
