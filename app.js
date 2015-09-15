@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with this program. If not, see http://www.gnu.org/licenses/.
  */
- 
- /* 
+
+/*
  * AngularJS Controller for Sample Caliper Application
  *
  * This controller manages the logic for the Sample Application
@@ -24,7 +24,7 @@
  *
  * @author: Prashant Nayak, Intellify Learning; Anthony Whyte, University of Michigan
  */
- 
+
 var app = angular.module('sampleCaliperApp', []);
 
 app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
@@ -52,19 +52,21 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
 
     // Controller functions for UI
     $scope.setSyllabusActive = function() {
+      $scope.navigateToHomePage(); // Fire Navigation Event
       $scope.syllabusActive = true;
       $scope.readingActive = false;
       $scope.quizActive = false;
     };
 
     $scope.setReadingActive = function() {
-      $scope.navigateToPage(); // Fire Navigation Event
+      $scope.navigateToReadingPage(); // Fire Navigation Event
       $scope.readingActive = true;
       $scope.quizActive = false;
       $scope.syllabusActive = false;
     };
 
     $scope.setQuizActive = function() {
+      $scope.navigateToQuizPage(); // Fire Navigation Event
       $scope.startQuiz(); // Fire Assessment Event
       $scope.quizActive = true;
       $scope.readingActive = false;
@@ -124,6 +126,9 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The edApp that is part of the Learning Context
       var edApp = obj;
 
+      // Target
+      var target = sampleAppSensorService.courseHomePage;
+
       // The LIS Course Section for the Event (part of Learning Context)
       var group = sampleAppSensorService.course;
 
@@ -136,6 +141,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       event.setAction(action);
       event.setObject(obj);
       event.setGenerated(generated);
+      event.setTarget(target);
       event.setEdApp(edApp);
       event.setGroup(group);
       event.setMembership(membership);
@@ -151,7 +157,62 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
     };
 
     // Navigation Event
-    $scope.navigateToPage = function() {
+    $scope.navigateToHomePage = function() {
+
+      // The Actor for the Event
+      var actor = sampleAppSensorService.currentUser;
+
+      // The Action for the Event
+      var action = Caliper.Actions.NavigationActions.NAVIGATED_TO;
+
+      // The Object being interacted with by the Actor
+      var obj = sampleAppSensorService.syllabus;
+
+      // The target object within the Event Object
+      var target = sampleAppSensorService.courseHomePage;
+
+      // The edApp that is part of the Learning Context
+      var edApp = sampleAppSensorService.edApp;
+
+      // The LIS Course Section for the Event (part of Learning Context)
+      var group = sampleAppSensorService.course;
+
+      // The actor's membership, roles and status
+      var membership = sampleAppSensorService.membership;
+
+      // Default navigation page
+      var navigatedFrom = sampleAppSensorService.courseHomePage;
+
+      // Reset if target value exists
+      if ($scope.currentEvent.target) {
+        navigatedFrom = $scope.currentEvent.target;
+      }
+
+      // Create the Navigation Event
+      var event = new Caliper.Events.NavigationEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(obj);
+      event.setTarget(target);
+      if (target != sampleAppSensorService.courseHomePage) {
+        event.setNavigatedFrom(navigatedFrom);
+      }
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setMembership(membership);
+      event.setEventTime(new Date().toISOString());
+
+      // console.log('created navigation event %O', event);
+
+      $scope.currentEventType = 'Navigation Event';
+      $scope.currentEvent = event;
+
+      // Send the event (check RequestBin for event JSON)
+      sampleAppSensorService.send(event);
+    };
+
+    // Navigation Event
+    $scope.navigateToReadingPage = function() {
 
       // The Actor for the Event
       var actor = sampleAppSensorService.currentUser;
@@ -174,8 +235,13 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The actor's membership, roles and status
       var membership = sampleAppSensorService.membership;
 
-      // Specific to the Navigation Event - the location where the user navigated from
+      // Default navigation page
       var navigatedFrom = sampleAppSensorService.courseHomePage;
+
+      // Reset if target value exists
+      if ($scope.currentEvent.target) {
+        navigatedFrom = $scope.currentEvent.target;
+      }
 
       // Create the Navigation Event
       var event = new Caliper.Events.NavigationEvent();
@@ -238,6 +304,59 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       console.log('created annotation event %O', event);
 
       $scope.currentEventType = 'Annotation Event';
+      $scope.currentEvent = event;
+
+      // Send the event (check RequestBin for event JSON)
+      sampleAppSensorService.send(event);
+    };
+
+    // Navigation Event
+    $scope.navigateToQuizPage = function() {
+
+      // The Actor for the Event
+      var actor = sampleAppSensorService.currentUser;
+
+      // The Action for the Event
+      var action = Caliper.Actions.NavigationActions.NAVIGATED_TO;
+
+      // The Object (Reading) being interacted with by the Actor
+      var obj = sampleAppSensorService.quiz;
+
+      // The target object within the Event Object
+      var target = sampleAppSensorService.quizPage;
+
+      // Default navigation page
+      var navigatedFrom = sampleAppSensorService.courseHomePage;
+
+      // Reset if target value exists
+      if ($scope.currentEvent.target) {
+        navigatedFrom = $scope.currentEvent.target;
+      }
+
+      // The edApp that is part of the Learning Context
+      var edApp = sampleAppSensorService.edApp;
+
+      // The LIS Course Section for the Event (part of Learning Context)
+      var group = sampleAppSensorService.course;
+
+      // The actor's membership, roles and status
+      var membership = sampleAppSensorService.membership;
+
+      // Create the Navigation Event
+      var event = new Caliper.Events.NavigationEvent();
+      event.setActor(actor);
+      event.setAction(action);
+      event.setObject(obj);
+      event.setTarget(target);
+      event.setNavigatedFrom(navigatedFrom);
+      event.setEdApp(edApp);
+      event.setGroup(group);
+      event.setMembership(membership);
+      event.setEventTime(new Date().toISOString());
+
+      // console.log('created navigation event %O', event);
+
+      $scope.currentEventType = 'Navigation Event';
       $scope.currentEvent = event;
 
       // Send the event (check RequestBin for event JSON)
@@ -346,7 +465,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
     };
 
     $scope.gradeQuiz = function() {
-      
+
       //console.log("Sending Outcome Event");
 
       // The Actor/Scorer for the Caliper Event.  No Event.membership is set for this actor.

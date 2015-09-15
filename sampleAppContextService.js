@@ -54,6 +54,16 @@ angular.module('sampleCaliperApp')
       return actor;
     };
 
+    // Get the Syllabus
+    var getSyllabus = function() {
+      var syllabus = new Caliper.Entities.DigitalResource("https://example.edu/deptOfPhysics/2014/physics101/syllabus");
+      syllabus.setName("Syllabus");
+      syllabus.setVersion("1.0");
+      syllabus.setDateCreated(decrementDate(new Date(), 14));
+      syllabus.setDateModified(decrementDate(new Date(), 7));
+      return syllabus;
+    };
+
     // Get the current Reading
     var ePub = {};
     var getReading = function() {
@@ -97,22 +107,22 @@ angular.module('sampleCaliperApp')
       return org;
     };
 
-    // Get the membership 
+    // Get the membership
     var getMembership = function() {
       var member = getUser();
       var course = getCourse();
 
-      var membership = new Caliper.Entities.Membership("https://example.edu/deptOfPhysics/2014/physics101/roster/554433"); 
-      membership.setDescription("Roster entry"); 
-      membership.setMember(member['@id']); 
-      membership.setOrganization(course['@id']); 
-      membership.setRoles([Caliper.Entities.Role.LEARNER]); 
-      membership.setStatus(Caliper.Entities.Status.ACTIVE); 
-      membership.setDateCreated(decrementDate(new Date(), 21)); 
-      return membership; 
+      var membership = new Caliper.Entities.Membership("https://example.edu/deptOfPhysics/2014/physics101/roster/554433");
+      membership.setDescription("Roster entry");
+      membership.setMember(member['@id']);
+      membership.setOrganization(course['@id']);
+      membership.setRoles([Caliper.Entities.Role.LEARNER]);
+      membership.setStatus(Caliper.Entities.Status.ACTIVE);
+      membership.setDateCreated(decrementDate(new Date(), 21));
+      return membership;
     };
 
-      // Get Web Page for current Course
+    // Get Home Page for current Course
     var getCourseHomePage = function() {
       var courseHomePage = new Caliper.Entities.WebPage("Physics101-Course-Homepage");
       courseHomePage.setName("Physics101-Course-Homepage");
@@ -120,6 +130,16 @@ angular.module('sampleCaliperApp')
       courseHomePage.setDateCreated(decrementDate(new Date(), 28));
       courseHomePage.setDateModified(decrementDate(new Date(), 25));
       return courseHomePage;
+    };
+
+    // Get Quiz Page for current Course
+    var getQuizPage = function() {
+      var quizPage = new Caliper.Entities.WebPage("Physics101-Course-QuizPage");
+      quizPage.setName("Physics101-Course-QuizPage");
+      quizPage.setIsPartOf(org);
+      quizPage.setDateCreated(decrementDate(new Date(), 28));
+      quizPage.setDateModified(decrementDate(new Date(), 25));
+      return quizPage;
     };
 
     // Get Quiz (Assessment) for current Course
@@ -154,12 +174,14 @@ angular.module('sampleCaliperApp')
     // Export the functions that will be used by other controllers and services
     var exports = {
       getUser: getUser,
+      getSyllabus: getSyllabus,
       getReading: getReading,
       getReadingFrame: getReadingFrame,
       getEdApp: getEdApp,
       getCourse: getCourse,
       getMembership: getMembership,
       getCourseHomePage: getCourseHomePage,
+      getQuizPage: getQuizPage,
       getQuiz: getQuiz
     };
 
