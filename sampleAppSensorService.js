@@ -36,7 +36,7 @@ angular.module('sampleCaliperApp')
     // to your request bin
     sensor.initialize('http://example.com/sensor/1',{
       host: 'requestb-in-1h04eq0e08pc.runscope.net',
-      path: '/uo6pecuo', // REPLACE WITH YOUR REQUEST BIN PATH
+      path: '/quu6jzqu', // REPLACE WITH YOUR REQUEST BIN PATH
       withCredentials: false
     });
 
@@ -57,19 +57,21 @@ angular.module('sampleCaliperApp')
       // Describe Entities using Caliper Sensor
       sensor.describe(entity);
     };
-    
+
     // Export the functions that will be used by controller
     var exports = {
       describe: describe,
       send: send,
       currentUser: sampleAppContextService.getUser(),
+      syllabus: sampleAppContextService.getSyllabus(),
       reading: sampleAppContextService.getReading(),
       readingFrame: sampleAppContextService.getReadingFrame(),
       edApp: sampleAppContextService.getEdApp(),
       course: sampleAppContextService.getCourse(),
       membership: sampleAppContextService.getMembership(),
       courseHomePage: sampleAppContextService.getCourseHomePage(),
-      quiz: sampleAppContextService.getQuiz()
+      quiz: sampleAppContextService.getQuiz(),
+      quizPage: sampleAppContextService.getQuizPage()
     };
 
     return exports;
