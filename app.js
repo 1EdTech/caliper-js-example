@@ -98,7 +98,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
     // Controller functions for specific Caliper Events //
     //////////////////////////////////////////////////////
 
-    // BOOTCAMP EXERCISE # 1: Session Event (Login)
     $scope.startSession = function() {
 
       // Actor LOGGED IN to edApp generating a new Session
@@ -211,7 +210,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.send(event);
     };
 
-    // Navigation Event
+    // Exercise 1: add missing Navigation Event properties (Caliper.Actions.NavigationActions.NAVIGATED_TO)
     $scope.navigateToReadingPage = function() {
 
       // The Actor for the Event
@@ -264,7 +263,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.send(event);
     };
 
-    // Annotation Event
+    // Exercise 2: add an Annotation Event (Caliper.Actions.AnnotationActions.TAGGED)
     $scope.addTagsToPage = function(tags) {
 
       // The Actor for the Caliper Event
@@ -363,7 +362,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.send(event);
     };
 
-    // Quiz Start Event
+    // Exercise 3: add a Quiz Start Event (Caliper.Actions.AssessmentActions.STARTED)
     $scope.startQuiz = function() {
 
       // The Actor for the Caliper Event
@@ -420,7 +419,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.send(event);
     };
 
-    // BOOTCAMP EXERCISE # 2: Quiz Submit Event
+    // Exercise 4: add a Quiz Submit Event (Caliper.Actions.AssessmentActions.SUBMITTED)
     $scope.submitQuizToSensor = function() {
 
       // Actor SUBMITTED Quiz Attempt
@@ -464,6 +463,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.send(event);
     };
 
+    // Exercise 5: add an Outcome Event (Caliper.Actions.OutcomeActions.GRADED)
     $scope.gradeQuiz = function() {
 
       //console.log("Sending Outcome Event");

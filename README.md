@@ -28,15 +28,19 @@ The application is modeled as a simple course delivery app that provides a sylla
 
 ### Bootcamp Exercises:
 
-#### Caliper Bootcamp Exercise #1 - Add missing Tag Annotation event properties
-* Insert missing event properties for a user tagging a reading.
+#### Caliper Bootcamp Exercise #1 - add missing Navigation event properties
+* Insert missing event properties for a user navigating to a Reading.
+* **app.js**: you will need to fill in the function ```$scope.navigateToReadingPage()```
+
+#### Caliper Bootcamp Exercise #2 - add a Tag Annotation event
+* Build a tagged event for a user tagging a reading.
 * **app.js**: you will need to fill in the function ```$scope.addTagsToPage()```
 
-#### Caliper Bootcamp Exercise #2 - add a quiz submission event
+#### Caliper Bootcamp Exercise #3 - add a quiz submission event
 * Build a quiz submitted event indicating that a user submitted a quiz attempt
 * **app.js**: you will need to fill in the function ```$scope.submitQuiz()```
 
-#### Caliper Bootcamp Exercise #3 - add a quiz outcome event
+#### Caliper Bootcamp Exercise #4 - add a quiz outcome event
 * Build a quiz outcome event that simulates an auto-graded quiz event
 * **app.js**: you will need to create a new function ```$scope.gradeQuiz()```
 
