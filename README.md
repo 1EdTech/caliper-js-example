@@ -1,8 +1,8 @@
-# IMS Global Caliper Analytics &#0153; Sample Application
+# IMS Global caliper-js-example sample app
 
-Sample application that utilizes the IMS Global Javascript sensor (caliper-js).
+This is a sample application that utilizes the IMS Global Javascript sensor (caliper-js).
 
-This application leverages the IMS Global Caliper information model and Caliper Javascript sensor (caliper-js) in order to generate a sequence of Caliper events.
+It leverages the IMS Global Caliper information model and caliper-js, a Javascript client for [Caliper](http://www.imsglobal.org) that provides an implementation of the Caliper SensorAPI™.
 
 The application is modeled as a simple course delivery app that provides a syllabus, reading to annotate and quiz.
 
@@ -44,6 +44,7 @@ The application is modeled as a simple course delivery app that provides a sylla
 * Build a quiz outcome event that simulates an auto-graded quiz event
 * **app.js**: you will need to create a new function ```$scope.gradeQuiz()```
 
-&copy; 2015 IMS Global Learning Consortium, Inc. All  Rights Reserved.
+©2015 IMS Global Learning Consortium, Inc. All Rights Reserved.  
+Trademark Information - http://www.imsglobal.org/copyright.html
 
-&#0153; [Trademark  Information](a href="http://www.imsglobal.org/copyright.html")
+For license information contact, info@imsglobal.org and read the license file contained in the repository.
