@@ -705,7 +705,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The object (Attempt) being submitted
       var obj = $scope.currentAttempt;
 
-      var generated = Caliper.Events.EntityFactory().create(Caliper.Entities.Result, {
+      var generated = Caliper.Entities.EntityFactory().create(Caliper.Entities.Result, {
         id: obj.id + "/result/1235",
         attempt: obj,
         normalScore: 1.0, // TODO Render score dynamic
