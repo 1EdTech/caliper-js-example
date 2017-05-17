@@ -46,7 +46,7 @@ angular.module('sampleCaliperApp')
 
     var options = {
       host: 'requestb-in-1h04eq0e08pc.runscope.net',
-      path: '/quu6jzqu', // REPLACE WITH YOUR REQUEST BIN PATH
+      path: '/142tlzp1', // REPLACE WITH YOUR REQUEST BIN PATH
       withCredentials: false
     };
 
