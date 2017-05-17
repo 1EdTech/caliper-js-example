@@ -29,39 +29,54 @@ angular.module('sampleCaliperApp')
 
     // Initialize Caliper sensor with options
     var sensor = Caliper.Sensor;
+    var client = Caliper.SensorClients.Client;
+    var requestor = Caliper.Requestors.HttpRequestor;
 
     // Note that you will have to create a new request bin
     // by navigating to http://requestb.in/
     // and replace the "path" setting below with the path 
     // to your request bin
+    /**
     sensor.initialize('http://example.com/sensor/1',{
       host: 'requestb-in-1h04eq0e08pc.runscope.net',
       path: '/quu6jzqu', // REPLACE WITH YOUR REQUEST BIN PATH
       withCredentials: false
     });
+     */
 
-    // Wrapper around Caliper Sensor's send()
-    var send = function(event) {
-
-      // Perform any pre-processing, etc.
-
-      // Send Events using Caliper Sensor
-      sensor.send(event);
+    var options = {
+      host: 'requestb-in-1h04eq0e08pc.runscope.net',
+      path: '/quu6jzqu', // REPLACE WITH YOUR REQUEST BIN PATH
+      withCredentials: false
     };
 
-    // Wrapper around Caliper Sensor's describe()
-    var describe = function(entity) {
+    // Initial Delegation chain
+    sensor.initialize("http://example.com/sensor/1");
+    client.initialize(sensor.id.concat("/clients/1"));
+    requestor.initialize(client.id.concat("/requestors/1", options));
+    client.registerRequestor(requestor);
+    sensor.registerClient(client);
 
-      // Perform any pre-processing, etc.
+    // Wrapper around Caliper Sensor getId()
+    var getId = function() {
+      return sensor.getId();
+    };
 
-      // Describe Entities using Caliper Sensor
-      sensor.describe(entity);
+    // Wrapper around Caliper Sensor createEnvelope()
+    var createEnvelope = function(opts) {
+      return sensor.createEnvelope(opts)
+    };
+
+    // Wrapper around Caliper Sensor's sendEnvelope()
+    var sendEnvelope = function(envelope) {
+      sensor.sendEnvelope(envelope);
     };
 
     // Export the functions that will be used by controller
     var exports = {
-      describe: describe,
-      send: send,
+      getId: getId,
+      createEnvelope: createEnvelope,
+      sendEnvelope: sendEnvelope,
       currentUser: sampleAppContextService.getUser(),
       syllabus: sampleAppContextService.getSyllabus(),
       reading: sampleAppContextService.getReading(),
