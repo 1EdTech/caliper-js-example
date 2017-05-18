@@ -44,11 +44,33 @@ angular.module('sampleCaliperApp')
     });
      */
 
+    // Intellify endpoint
     var options = {
-      host: 'requestb-in-1h04eq0e08pc.runscope.net',
-      path: '/quu6jzqu', // REPLACE WITH YOUR REQUEST BIN PATH
-      withCredentials: false
+      host: 'demo.intellify.io',
+      path: '/collector/v2/caliper/event',
+      withCredentials: false,
+      headers: {
+        "Authorization": "40dI6P62Q_qrWxpTk95z8w",
+        "Content-Length": null,
+        "Content-Type": "application/json"
+      },
+      method: "POST"
     };
+
+    // Requestbin endpoint
+    /**
+     var options = {
+      host: 'requestb-in-4f2lrjhmp27c.runscope.net',
+      path: '/rrccxxrr', // REPLACE WITH YOUR REQUEST BIN PATH
+      withCredentials: false
+      headers: {
+      "Authorization": "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc=", // caliperv1p1bootcamp2017 Base64 encode
+      "Content-Length": null,
+      "Content-Type": "application/json"
+      },
+      method: "POST"
+    };
+     */
 
     // Initial Delegation chain
     sensor.initialize("http://example.com/sensor/1");

@@ -98,8 +98,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
     // Controller functions for specific Caliper Events //
     //////////////////////////////////////////////////////
 
-
-
     $scope.startSession = function() {
       // Actor LOGGED IN to edApp generating a new Session
 
@@ -150,19 +148,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         membership: membership,
         session: session
       });
-
-      /**
-      var event = new Caliper.Events.SessionEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setGenerated(generated);
-      event.setTarget(target);
-      event.setEdApp(edApp);
-      event.setGroup(group);
-      event.setMembership(membership);
-      event.setEventTime(new Date().toISOString());
-       */
 
       // console.log('created session event %O', event);
 
@@ -239,19 +224,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         session: session
       });
 
-      // Create the Navigation Event
-      /**
-      var event = new Caliper.Events.NavigationEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setTarget(target);
-      event.setEdApp(edApp);
-      event.setGroup(group);
-      event.setMembership(membership);
-      event.setEventTime(new Date().toISOString());
-       */
-
       // console.log('created navigation event %O', event);
 
       $scope.currentEventType = 'Navigation Event';
@@ -308,20 +280,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         startedAtTime: sessionStart
       });
 
-      // Create the Navigation Event
-      /**
-      var event = new Caliper.Events.NavigationEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setTarget(target);
-      event.setNavigatedFrom(navigatedFrom);
-      event.setEdApp(edApp);
-      event.setGroup(group);
-      event.setMembership(membership);
-      event.setEventTime(new Date().toISOString());
-       */
-
       // console.log('created navigation event %O', event);
 
       $scope.currentEventType = 'Navigation Event';
@@ -357,13 +315,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         dateCreated: new Date().toISOString()
       });
 
-      // The generated object (Tag annotation)
-      /**
-      var generated = new Caliper.Entities.TagAnnotation("https://imsglobal.org/sampleCaliperApp/tags/7654");
-      generated.setTags(tags);
-      generated.setDateCreated(new Date().toISOString());
-       */
-
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
 
@@ -395,19 +346,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         membership: membership,
         session: session
       });
-
-      // Create the Annotation Event
-      /**
-      var event = new Caliper.Events.AnnotationEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setGenerated(generated);
-      event.setEdApp(edApp);
-      event.setGroup(group);
-      event.setMembership(membership);
-      event.setEventTime(new Date().toISOString());
-       */
 
       console.log('created annotation event %O', event);
 
@@ -490,20 +428,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         session: session
       });
 
-      // Create the Navigation Event
-      /**
-      var event = new Caliper.Events.NavigationEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setTarget(target);
-      event.setNavigatedFrom(navigatedFrom);
-      event.setEdApp(edApp);
-      event.setGroup(group);
-      event.setMembership(membership);
-      event.setEventTime(new Date().toISOString());
-       */
-
       // console.log('created navigation event %O', event);
 
       $scope.currentEventType = 'Navigation Event';
@@ -541,21 +465,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         startedAtTime: attemptDate
       });
 
-      // The generated object (Attempt) within the Event Object
-      /**
-      var generated = new Caliper.Entities.Attempt("https://some-university.edu/deptOfPhysics/2014/physics101/assessment1/attempt1");
-      generated.setName(null);
-      generated.setDescription(null);
-      generated.setActor(actor['@id']);
-      generated.setAssignable(obj['@id']);
-      generated.setDateCreated(new Date().toISOString());
-      generated.setDateModified(null);
-      generated.setCount(1);
-      generated.setStartedAtTime(new Date().toISOString());
-      generated.setEndedAtTime(null);
-      generated.setDuration(null);
-       */
-
       // Assign to scope object so that the submit quiz event can reference it
       $scope.currentAttempt = generated;
 
@@ -591,19 +500,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         membership: membership,
         session: session
       });
-
-      // Create the Assessment Event
-      /**
-      var event = new Caliper.Events.AssessmentEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setGenerated(generated);
-      event.setEdApp(edApp);
-      event.setGroup(group);
-      event.setMembership(membership);
-      event.setEventTime(new Date().toISOString());
-       */
 
       // console.log('created assessment event %O', event);
 
@@ -667,18 +563,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         session: session
       });
 
-      // Create the Assessment Event (Uncomment and set references to objects)
-      /**
-      var event = new Caliper.Events.AssessmentEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setEdApp(edApp);
-      event.setGroup(group);
-      event.setMembership(membership);
-      event.setEventTime(new Date().toISOString());
-       */
-
       // console.log('created assessment event %O', event);
 
       $scope.currentEventType = 'Assessment Event (SUBMITTED)';
@@ -705,7 +589,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // The object (Attempt) being submitted
       var obj = $scope.currentAttempt;
 
-      var generated = Caliper.Events.EntityFactory().create(Caliper.Entities.Result, {
+      var generated = Caliper.Entities.EntityFactory().create(Caliper.Entities.Result, {
         id: obj.id + "/result/1235",
         attempt: obj,
         normalScore: 1.0, // TODO Render score dynamic
@@ -719,22 +603,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         dateCreated: new Date().toISOString()
       });
 
-      // The generated object (Result)
-      /**
-      var generated = new Caliper.Entities.Result(obj['@id'] + "/result/1235");
-      generated.setActor(actor['@id']);
-      generated.setAssignable(obj.assignable);
-      generated.setDateCreated(new Date().toISOString());
-      generated.setNormalScore(1.0); // TODO Render score dynamic
-      generated.setPenaltyScore(0.0);
-      generated.setExtraCreditScore(0.0);
-      generated.setTotalScore(1.0);
-      generated.setCurvedTotalScore(1.0);
-      generated.setCurveFactor(0.0);
-      generated.setComment("Caliper rocks!");
-      generated.setScoredBy(actor);
-       */
-
       // Create the OutcomeEvent
       var event = Caliper.Events.EventFactory().create(Caliper.Events.OutcomeEvent, {
         id: id,
@@ -744,18 +612,6 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         eventTime: new Date().toISOString(),
         generated: generated
       });
-
-      // The Outcome Event
-      /**
-      var event = new Caliper.Events.OutcomeEvent();
-      event.setActor(actor);
-      event.setAction(action);
-      event.setObject(obj);
-      event.setGenerated(generated);
-      event.setEdApp(actor);
-      event.setGroup(group);
-      event.setEventTime(new Date().toISOString());
-       */
 
       $scope.currentEventType = 'Outcome Event (GRADED)';
       $scope.currentEvent = event;
