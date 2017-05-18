@@ -73,7 +73,7 @@ angular.module('sampleCaliperApp')
 
     // Initial Delegation chain
     sensor.initialize("http://example.com/sensor/1");
-    client.initialize(sensor.id.concat("/clients/1", options));
+    client.initialize(sensor.id.concat("/clients/1"), options);
     sensor.registerClient(client);
 
     // Wrapper around Caliper Sensor getId()
