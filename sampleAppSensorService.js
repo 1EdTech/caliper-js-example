@@ -29,7 +29,7 @@ angular.module('sampleCaliperApp')
 
     // Initialize Caliper sensor with options
     var sensor = Caliper.Sensor;
-    var client = Caliper.SensorClients.Client;
+    var client = Caliper.SensorClients.HttpClient;
 
     // Note that you will have to create a new request bin
     // by navigating to http://requestb.in/
