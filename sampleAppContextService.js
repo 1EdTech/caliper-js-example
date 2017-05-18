@@ -53,15 +53,9 @@ angular.module('sampleCaliperApp')
     // Get the current user as a Caliper Actor
     var getUser = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Person, {
-        id: BASE_IRI + "/users/554433",
+        id: "https://www.umich.edu/staff/arwhyte",
         dateCreated: decrementDate(new Date(), 45)
       });
-
-      /**
-      var actor = new Caliper.Entities.Person("https://example.edu/user/554433");
-      actor.setDateCreated(decrementDate(new Date(), 45));
-      return actor;
-       */
     };
 
     // Get the Syllabus
@@ -73,19 +67,9 @@ angular.module('sampleCaliperApp')
         dateCreated: decrementDate(new Date(), 14),
         dateModified: decrementDate(new Date(), 7)
       });
-
-      /**
-      var syllabus = new Caliper.Entities.DigitalResource("https://example.edu/deptOfPhysics/2017/physics101/syllabus");
-      syllabus.setName("Syllabus");
-      syllabus.setVersion("1.0");
-      syllabus.setDateCreated(decrementDate(new Date(), 14));
-      syllabus.setDateModified(decrementDate(new Date(), 7));
-      return syllabus;
-       */
     };
 
     // Get the current Reading
-    //var ePub = {};
     var getReading = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Document, {
         id: "https://github.com/readium/readium-js-viewer/book/34843#epubcfi(/4/3)", // TODO change URL
@@ -94,15 +78,6 @@ angular.module('sampleCaliperApp')
         dateCreated: decrementDate(new Date(), 14),
         dateModified: decrementDate(new Date(), 7)
       });
-
-      /**
-      ePub = new Caliper.Entities.EPubVolume("https://github.com/readium/readium-js-viewer/book/34843#epubcfi(/4/3)");
-      ePub.setName("States of Matter - A Condensed History");
-      ePub.setVersion("1.0");
-      ePub.setDateCreated(decrementDate(new Date(), 14));
-      ePub.setDateModified(decrementDate(new Date(), 7));
-      return ePub;
-       */
     };
 
     var getReadingFrame = function() {
@@ -116,17 +91,6 @@ angular.module('sampleCaliperApp')
         dateCreated: reading.dateCreated,
         dateModified: reading.dateModified
       });
-
-      /**
-      var ePubFrame = new Caliper.Entities.Frame("https://github.com/readium/readium-js-viewer/book/frame/34843#epubcfi(/4/3/1)");
-      ePubFrame.setName("Introduction to the states of matter");
-      ePubFrame.setIndex(1);
-      ePubFrame.setIsPartOf(ePub);
-      ePubFrame.setVersion(ePub.version);
-      ePubFrame.setDateCreated(ePub.dateCreated);
-      ePubFrame.setDateModified(ePub.dateModified);
-      return ePubFrame;
-       */
     };
 
     // Get the current edApp
@@ -136,17 +100,9 @@ angular.module('sampleCaliperApp')
         name: "Sample Caliper App",
         dateCreated: decrementDate(new Date(), 30)
       });
-
-      /**
-      var edApp = new Caliper.Entities.SoftwareApplication("https://imsglobal.org/sampleCaliperApp");
-      edApp.setName("Sample Caliper App");
-      edApp.setDateCreated(decrementDate(new Date(), 30));
-      return edApp;
-       */
     };
 
     // Get the current Course
-    // var org = {};
     var getCourse = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.CourseSection, {
         id: COURSE_IRI,
@@ -157,17 +113,6 @@ angular.module('sampleCaliperApp')
         dateCreated: decrementDate(new Date(), 30),
         dateModified: decrementDate(new Date(), 28)
       });
-
-      /**
-      org = new Caliper.Entities.CourseSection("https://example.edu/deptOfPhysics/2017/physics101");
-      org.setCourseNumber("Phy-101");
-      org.setName("Introductory Physics");
-      org.setDescription("This is a Physics course for beginners.");
-      org.setAcademicSession("Fall-2015");
-      org.setDateCreated(decrementDate(new Date(), 30));
-      org.setDateModified(decrementDate(new Date(), 28));
-      return org;
-       */
     };
 
     // Get the membership
@@ -180,21 +125,10 @@ angular.module('sampleCaliperApp')
         description: "Roster entry",
         member: member,
         organization: organization,
-        roles: [Caliper.Entities.Role.LEARNER],
-        status: Caliper.Entities.Status.ACTIVE,
+        roles: [Caliper.Entities.Role.LEARNER.term],
+        status: Caliper.Entities.Status.ACTIVE.term,
         dateCreated: decrementDate(new Date(), 21)
       });
-
-      /**
-      var membership = new Caliper.Entities.Membership("https://example.edu/deptOfPhysics/2017/physics101/roster/554433");
-      membership.setDescription("Roster entry");
-      membership.setMember(member['@id']);
-      membership.setOrganization(course['@id']);
-      membership.setRoles([Caliper.Entities.Role.LEARNER]);
-      membership.setStatus(Caliper.Entities.Status.ACTIVE);
-      membership.setDateCreated(decrementDate(new Date(), 21));
-      return membership;
-       */
     };
 
     // Get Home Page for current Course
@@ -207,15 +141,6 @@ angular.module('sampleCaliperApp')
         dateCreated: decrementDate(new Date(), 28),
         dateModfied: decrementDate(new Date(), 25)
       });
-
-      /**
-      var courseHomePage = new Caliper.Entities.WebPage("Physics101-Course-Homepage");
-      courseHomePage.setName("Physics101-Course-Homepage");
-      courseHomePage.setIsPartOf(org);
-      courseHomePage.setDateCreated(decrementDate(new Date(), 28));
-      courseHomePage.setDateModified(decrementDate(new Date(), 25));
-      return courseHomePage;
-       */
     };
 
     // Get Quiz Page for current Course
@@ -228,15 +153,6 @@ angular.module('sampleCaliperApp')
         dateCreated: decrementDate(new Date(), 28),
         dateModified: decrementDate(new Date(), 25)
       });
-
-      /**
-      var quizPage = new Caliper.Entities.WebPage("Physics101-Course-QuizPage");
-      quizPage.setName("Physics101-Course-QuizPage");
-      quizPage.setIsPartOf(org);
-      quizPage.setDateCreated(decrementDate(new Date(), 28));
-      quizPage.setDateModified(decrementDate(new Date(), 25));
-      return quizPage;
-       */
     };
 
     // Get Quiz
@@ -257,24 +173,6 @@ angular.module('sampleCaliperApp')
         maxSubmits: 2,
         maxScore: 3.0
       });
-
-      /**
-       var quiz = new Caliper.Entities.Assessment("https://example.edu/deptOfPhysics/2017/physics101/assessment1");
-       quiz.setName("States of Matter - Assessment");
-       quiz.setIsPartOf("https://some-university.edu/deptOfPhysics/2017/physics101");
-       quiz.setDateCreated(decrementDate(new Date(), 28));
-       quiz.setDateModified(decrementDate(new Date(), 27));
-       quiz.setDatePublished(decrementDate(new Date(), 14));
-       quiz.setDateToActivate(decrementDate(new Date(), 13));
-       quiz.setDateToShow(decrementDate(new Date(), 12));
-       quiz.setDateToStartOn(incrementDate(new Date(), 7));
-       quiz.setDateToSubmit(incrementDate(new Date(), 14));
-       quiz.setMaxAttempts(2);
-       quiz.setMaxSubmits(2);
-       quiz.setMaxScore(3.0);
-
-       return quiz;
-       */
     };
 
     // Get Quiz item
@@ -290,20 +188,6 @@ angular.module('sampleCaliperApp')
         dateCreated: quiz.dateCreated,
         dateModified: quiz.dateModified
       });
-
-      /**
-      // The Quiz has one AssessmentItem
-      var assessmentItem1 = new Caliper.Entities.AssessmentItem("https://example.edu/deptOfPhysics/2017/physics101/assessment1/item1");
-      assessmentItem1.setName("Assessment Item 1");
-      assessmentItem1.setIsPartOf("https://example.edu/deptOfPhysics/2017/physics101/assessment1");
-      assessmentItem1.setMaxAttempts(2);
-      assessmentItem1.setMaxSubmits(2);
-      assessmentItem1.setMaxScore(1.0);
-      assessmentItem1.setDateCreated(quiz.dateCreated);
-      assessmentItem1.setDateModified(quiz.dateModified);
-
-      return quiz;
-       */
     };
 
     // Export the functions that will be used by other controllers and services

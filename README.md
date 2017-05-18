@@ -44,7 +44,7 @@ The application is modeled as a simple course delivery app that provides a sylla
 * Build a quiz outcome event that simulates an auto-graded quiz event
 * **app.js**: you will need to create a new function ```$scope.gradeQuiz()```
 
-©2015 IMS Global Learning Consortium, Inc. All Rights Reserved.  
+©2015-2017 IMS Global Learning Consortium, Inc. All Rights Reserved.  
 Trademark Information - http://www.imsglobal.org/copyright.html
 
 For license information contact, info@imsglobal.org and read the license file contained in the repository.
