@@ -61,7 +61,7 @@ angular.module('sampleCaliperApp')
      var options = {
       host: 'requestb-in-4f2lrjhmp27c.runscope.net',
       path: '/rrccxxrr', // REPLACE WITH YOUR REQUEST BIN PATH
-      withCredentials: false
+      withCredentials: false,
       headers: {
       "Authorization": "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc=", // caliperv1p1bootcamp2017 Base64 encode
       "Content-Length": null,
