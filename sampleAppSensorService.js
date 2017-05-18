@@ -30,7 +30,6 @@ angular.module('sampleCaliperApp')
     // Initialize Caliper sensor with options
     var sensor = Caliper.Sensor;
     var client = Caliper.SensorClients.Client;
-    var requestor = Caliper.Requestors.HttpRequestor;
 
     // Note that you will have to create a new request bin
     // by navigating to http://requestb.in/
@@ -74,9 +73,7 @@ angular.module('sampleCaliperApp')
 
     // Initial Delegation chain
     sensor.initialize("http://example.com/sensor/1");
-    client.initialize(sensor.id.concat("/clients/1"));
-    requestor.initialize(client.id.concat("/requestors/1", options));
-    client.registerRequestor(requestor);
+    client.initialize(sensor.id.concat("/clients/1", options));
     sensor.registerClient(client);
 
     // Wrapper around Caliper Sensor getId()
