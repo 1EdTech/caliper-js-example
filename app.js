@@ -280,6 +280,21 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         startedAtTime: sessionStart
       });
 
+      // Create the Navigation Event
+      var event = Caliper.Events.EventFactory().create(Caliper.Events.NavigationEvent, {
+        id: id,
+        actor: actor,
+        action: action,
+        object: obj,
+        eventTime: new Date().toISOString(),
+        target: target,
+        referrer: referrer,
+        edApp: edApp,
+        group: group,
+        membership: membership,
+        session: session
+      });
+
       // console.log('created navigation event %O', event);
 
       $scope.currentEventType = 'Navigation Event';
@@ -341,6 +356,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         action: action,
         object: obj,
         eventTime: new Date().toISOString(),
+        generated: generated,
         edApp: edApp,
         group: group,
         membership: membership,
@@ -415,7 +431,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
 
       // Create the Navigation Event
       var event = Caliper.Events.EventFactory().create(Caliper.Events.NavigationEvent, {
-        id: "id",
+        id: id,
         actor: actor,
         action: action,
         object: obj,

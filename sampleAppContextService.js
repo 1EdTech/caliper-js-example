@@ -125,8 +125,8 @@ angular.module('sampleCaliperApp')
         description: "Roster entry",
         member: member,
         organization: organization,
-        roles: [Caliper.Entities.Role.LEARNER.term],
-        status: Caliper.Entities.Status.ACTIVE.term,
+        roles: [Caliper.Entities.Role.learner.term],
+        status: Caliper.Entities.Status.active.term,
         dateCreated: decrementDate(new Date(), 21)
       });
     };

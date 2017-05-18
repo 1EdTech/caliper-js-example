@@ -44,6 +44,7 @@ angular.module('sampleCaliperApp')
      */
 
     // Intellify endpoint
+    /**
     var options = {
       host: 'demo.intellify.io',
       path: '/collector/v2/caliper/event',
@@ -55,25 +56,24 @@ angular.module('sampleCaliperApp')
       },
       method: "POST"
     };
+     */
 
     // Requestbin endpoint
-    /**
-     var options = {
+    var options = {
       host: 'requestb-in-4f2lrjhmp27c.runscope.net',
       path: '/rrccxxrr', // REPLACE WITH YOUR REQUEST BIN PATH
-      withCredentials: false
+      withCredentials: false,
       headers: {
-      "Authorization": "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc=", // caliperv1p1bootcamp2017 Base64 encode
+      "Authorization": "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc=",
       "Content-Length": null,
       "Content-Type": "application/json"
       },
       method: "POST"
     };
-     */
 
     // Initial Delegation chain
     sensor.initialize("http://example.com/sensor/1");
-    client.initialize(sensor.id.concat("/clients/1", options));
+    client.initialize(sensor.id.concat("/clients/1"), options);
     sensor.registerClient(client);
 
     // Wrapper around Caliper Sensor getId()
