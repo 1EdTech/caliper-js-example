@@ -431,7 +431,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
 
       // Create the Navigation Event
       var event = Caliper.Events.EventFactory().create(Caliper.Events.NavigationEvent, {
-        id: "id",
+        id: id,
         actor: actor,
         action: action,
         object: obj,
