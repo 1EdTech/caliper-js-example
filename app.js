@@ -155,7 +155,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };
@@ -230,7 +235,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };
@@ -301,7 +311,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };
@@ -369,7 +384,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };
@@ -408,7 +428,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       if ($scope.currentEvent.target) {
         navigatedFrom = $scope.currentEvent.target;
       }
-       */
+      */
 
       // The edApp that is part of the Learning Context
       var edApp = sampleAppSensorService.edApp;
@@ -450,7 +470,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };
@@ -523,7 +548,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };
@@ -536,7 +566,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       // Event identifier
       var id = "urn:uuid:e5891791-3d27-4df1-a272-091806a43dfb";
 
-      // The Actor for the Caliper Event 
+      // The Actor for the Caliper Event
       var actor = sampleAppSensorService.currentUser;
 
       // The Action for the Caliper Event (Hint: Use AssessmentActions)
@@ -585,7 +615,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };
@@ -633,7 +668,12 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       $scope.currentEvent = event;
 
       // Send event
-      var opts = {sensor: sampleAppSensorService.getId, data: event};
+      var opts = {
+        sensor: sampleAppSensorService.getId,
+        sendTime: new Date().toISOString(),
+        dataVersion: sampleAppSensorService.getEnvelopeDataVersion(),
+        data: event
+      };
       var envelope = sampleAppSensorService.createEnvelope(opts);
       sampleAppSensorService.sendEnvelope(envelope);
     };

@@ -16,10 +16,10 @@
  * with this program. If not, see http://www.gnu.org/licenses/.
  */
 
-/* 
+/*
  * Sample App Context Service
  *
- * This service wraps the caliper-js sensor and provides a set of sample Caliper 
+ * This service wraps the caliper-js sensor and provides a set of sample Caliper
  * entities
  *
  * @author: Prashant Nayak, Intellify Learning; Anthony Whyte, University of Michigan
@@ -53,7 +53,7 @@ angular.module('sampleCaliperApp')
     // Get the current user as a Caliper Actor
     var getUser = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Person, {
-        id: "https://www.umich.edu/staff/arwhyte",
+        id: "https://www.example.org/cgwhyte",
         dateCreated: decrementDate(new Date(), 45)
       });
     };
