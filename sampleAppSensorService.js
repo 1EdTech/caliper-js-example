@@ -16,10 +16,10 @@
  * with this program. If not, see http://www.gnu.org/licenses/.
  */
 
-/* 
+/*
  * Sample App Sensor Service
  *
- * This service wraps the caliper-js sensor, enabling any application specific 
+ * This service wraps the caliper-js sensor, enabling any application specific
  * logic to be performed before sending events using the base Javascript sensor
  *
  * @author: Prashant Nayak, Intellify Learning; Anthony Whyte, University of Michigan
@@ -27,72 +27,81 @@
 angular.module('sampleCaliperApp')
   .factory('sampleAppSensorService', ['sampleAppContextService', function(sampleAppContextService) {
 
-    // Initialize Caliper sensor with options
     var sensor = Caliper.Sensor;
-    var client = Caliper.SensorClients.HttpClient;
+    var client = Caliper.Clients.HttpClient;
+    var config = Caliper.Config.Config;
+    var options = Caliper.Clients.HttpOptions;
 
-    // Note that you will have to create a new request bin
-    // by navigating to http://requestb.in/
-    // and replace the "path" setting below with the path 
-    // to your request bin
     /**
-    sensor.initialize('http://example.com/sensor/1',{
-      host: 'requestb-in-1h04eq0e08pc.runscope.net',
-      path: '/quu6jzqu', // REPLACE WITH YOUR REQUEST BIN PATH
-      withCredentials: false
-    });
+     * HTTP OPTIONS & SENSOR/CLIENT IDENTIFIERS TO SET
+     *
+     * 1) HTTP request options
+     * 1.1  Set by Sensor (can be overridden)
+     * options.method: "POST"
+     * options.headers["Content-Length"]: decimal number of OCTETS per RFC 2616
+     * options.headers["Content-Type"]: "application/json"
+     * options.body: stringified envelope filtered by a replacer function
+     * options.timeout: 10000
+     *
+     * 1.2 Set by You
+     * options.uri: <string> fully qualified endpoint URL
+     * options.headers["Authorization"]: API key
+     *
+     * 2) Sensor and Client ids
+     * These identifiers may need to be set to a specific value in order to
+     * authenticate against a given endpoint (e.g., Intellify endpoint requires
+     * a known Sensor Id).
      */
 
     // Intellify endpoint
-    /**
-    var options = {
-      host: 'demo.intellify.io',
-      path: '/collector/v2/caliper/event',
-      withCredentials: false,
-      headers: {
-        "Authorization": "40dI6P62Q_qrWxpTk95z8w",
-        "Content-Length": null,
-        "Content-Type": "application/json"
-      },
-      method: "POST"
-    };
-     */
+    options.uri = "https://demo.intellify.io/collector/v2/caliper/event";
+    options.headers["Authorization"] = "40dI6P62Q_qrWxpTk95z8w";
 
     // Requestbin endpoint
-    var options = {
-      host: 'requestb-in-4f2lrjhmp27c.runscope.net',
-      path: '/rrccxxrr', // REPLACE WITH YOUR REQUEST BIN PATH
-      withCredentials: false,
-      headers: {
-      "Authorization": "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc=",
-      "Content-Length": null,
-      "Content-Type": "application/json"
-      },
-      method: "POST"
-    };
+    /**
+     var host = "https://requestb-in-1h04eq0e08pc.runscope.net";
+     var path = "/quu6jzqu"; // REPLACE WITH YOUR REQUEST BIN PATH
+     options.uri = host.concat(path);
+     options.headers["Authorization"] = "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc="; // Faux
+     options.withCredentials = false;
+     */
 
-    // Initial Delegation chain
-    sensor.initialize("http://example.com/sensor/1");
+    /**
+     console.log("OPTIONS: " + options.method);
+     console.log("OPTIONS: " + options.uri);
+     console.log("OPTIONS: " + options.headers["Authorization"]);
+     console.log("OPTIONS: " + options.headers["Content-Type"]);
+     console.log("OPTIONS: " + options.timeout);
+     */
+
+    // Initialize Sensor and register Client (delegation chain)
+    sensor.initialize("org.ims.caliper.bootcamp2017");
     client.initialize(sensor.id.concat("/clients/1"), options);
     sensor.registerClient(client);
 
+    // Wrapper around Caliper Sensor config.
+    var getEnvelopeDataVersion = function getEnvelopeDataVersion() {
+      return config.dataVersion;
+    };
+
     // Wrapper around Caliper Sensor getId()
-    var getId = function() {
+    var getId = function getId() {
       return sensor.getId();
     };
 
     // Wrapper around Caliper Sensor createEnvelope()
-    var createEnvelope = function(opts) {
+    var createEnvelope = function createEnvelope(opts) {
       return sensor.createEnvelope(opts)
     };
 
     // Wrapper around Caliper Sensor's sendEnvelope()
-    var sendEnvelope = function(envelope) {
-      sensor.sendEnvelope(envelope);
+    var sendEnvelope = function sendEnvelope(envelope) {
+      sensor.sendToClient(client, envelope);
     };
 
     // Export the functions that will be used by controller
     var exports = {
+      getEnvelopeDataVersion: getEnvelopeDataVersion,
       getId: getId,
       createEnvelope: createEnvelope,
       sendEnvelope: sendEnvelope,
