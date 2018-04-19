@@ -26,82 +26,47 @@
  */
 angular.module('sampleCaliperApp')
   .factory('sampleAppSensorService', ['sampleAppContextService', function(sampleAppContextService) {
-
+    
+    // Initialize Caliper sensor
     var sensor = Caliper.Sensor;
+    sensor.initialize("http://example.org/sensors/1");
+    
+    // TAKE HEED: you must uncomment and define the HTTPClient options (endpoint, message headers, etc.)
+    // Example: RequestBin endpoint running in Heroku (Runscope's public version has been disabled due to misuse)
+    /**
+    var options = {
+      uri: 'https://someplace.herokuapp.com/wufdiiwu',
+      withCredentials: false,
+      headers: {
+        "Authorization": "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc=",
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    };
+    */
+    
+    // Initialize then register HTTP client
     var client = Caliper.Clients.HttpClient;
-    var config = Caliper.Config.Config;
-    var options = Caliper.Clients.HttpOptions;
-
-    /**
-     * HTTP OPTIONS & SENSOR/CLIENT IDENTIFIERS TO SET
-     *
-     * 1) HTTP request options
-     * 1.1  Set by Sensor (can be overridden)
-     * options.method: "POST"
-     * options.headers["Content-Length"]: decimal number of OCTETS per RFC 2616
-     * options.headers["Content-Type"]: "application/json"
-     * options.body: stringified envelope filtered by a replacer function
-     * options.timeout: 10000
-     *
-     * 1.2 Set by You
-     * options.uri: <string> fully qualified endpoint URL
-     * options.headers["Authorization"]: API key
-     *
-     * 2) Sensor and Client ids
-     * These identifiers may need to be set to a specific value in order to
-     * authenticate against a given endpoint (e.g., Intellify endpoint requires
-     * a known Sensor Id).
-     */
-
-    // Intellify endpoint
-    options.uri = "https://demo.intellify.io/collector/v2/caliper/event";
-    options.headers["Authorization"] = "40dI6P62Q_qrWxpTk95z8w";
-
-    // Requestbin endpoint
-    /**
-     var host = "https://requestb-in-1h04eq0e08pc.runscope.net";
-     var path = "/quu6jzqu"; // REPLACE WITH YOUR REQUEST BIN PATH
-     options.uri = host.concat(path);
-     options.headers["Authorization"] = "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc="; // Faux
-     options.withCredentials = false;
-     */
-
-    /**
-     console.log("OPTIONS: " + options.method);
-     console.log("OPTIONS: " + options.uri);
-     console.log("OPTIONS: " + options.headers["Authorization"]);
-     console.log("OPTIONS: " + options.headers["Content-Type"]);
-     console.log("OPTIONS: " + options.timeout);
-     */
-
-    // Initialize Sensor and register Client (delegation chain)
-    sensor.initialize("org.ims.caliper.bootcamp2017");
     client.initialize(sensor.id.concat("/clients/1"), options);
     sensor.registerClient(client);
-
-    // Wrapper around Caliper Sensor config.
-    var getEnvelopeDataVersion = function getEnvelopeDataVersion() {
-      return config.dataVersion;
-    };
-
+    
     // Wrapper around Caliper Sensor getId()
-    var getId = function getId() {
+    var getId = function() {
       return sensor.getId();
     };
-
+    
     // Wrapper around Caliper Sensor createEnvelope()
-    var createEnvelope = function createEnvelope(opts) {
+    var createEnvelope = function(opts) {
       return sensor.createEnvelope(opts)
     };
-
+    
     // Wrapper around Caliper Sensor's sendEnvelope()
-    var sendEnvelope = function sendEnvelope(envelope) {
-      sensor.sendToClient(client, envelope);
+    var sendEnvelope = function(envelope) {
+      sensor.sendToClients(envelope);
     };
-
+    
     // Export the functions that will be used by controller
     var exports = {
-      getEnvelopeDataVersion: getEnvelopeDataVersion,
       getId: getId,
       createEnvelope: createEnvelope,
       sendEnvelope: sendEnvelope,
@@ -116,6 +81,6 @@ angular.module('sampleCaliperApp')
       quiz: sampleAppContextService.getQuiz(),
       quizPage: sampleAppContextService.getQuizPage()
     };
-
+    
     return exports;
   }]);
