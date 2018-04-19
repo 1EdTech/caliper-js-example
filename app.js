@@ -235,7 +235,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.sendEnvelope(envelope);
     };
     
-    // Exercise 1: add missing Navigation Event properties (Caliper.Actions.NavigationActions.NAVIGATED_TO)
+    // Exercise 1: add missing Navigation Event properties
     $scope.navigateToReadingPage = function() {
       
       // Event identifier
@@ -306,7 +306,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.sendEnvelope(envelope);
     };
     
-    // Exercise 2: add an Annotation Event (Caliper.Actions.AnnotationActions.TAGGED)
+    // Exercise 2: add an Annotation Event
     $scope.addTagsToPage = function(tags) {
       
       // Event identifier
@@ -455,7 +455,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.sendEnvelope(envelope);
     };
     
-    // Exercise 3: add a Quiz Start Event (Caliper.Actions.AssessmentActions.STARTED)
+    // Exercise 3: add a Quiz Start Event
     $scope.startQuiz = function() {
       // Event identifier
       var id = "urn:uuid:dad88464-0c20-4a19-a1ba-ddf2f9c3ff33";
@@ -527,7 +527,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.sendEnvelope(envelope);
     };
     
-    // Exercise 4: add a Quiz Submit Event (Caliper.Actions.AssessmentActions.SUBMITTED)
+    // Exercise 4: add a Quiz Submit Event
     $scope.submitQuizToSensor = function() {
       
       // Actor SUBMITTED Quiz Attempt
@@ -589,7 +589,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.sendEnvelope(envelope);
     };
     
-    // Exercise 5: add an Outcome Event (Caliper.Actions.OutcomeActions.GRADED)
+    // Exercise 5: add a GradeEvent
     $scope.gradeQuiz = function() {
       
       // Event identifier
@@ -618,8 +618,8 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         dateCreated: new Date().toISOString()
       });
       
-      // Create the OutcomeEvent
-      var event = Caliper.Events.EventFactory().create(Caliper.Events.OutcomeEvent, {
+      // Create the GradeEvent
+      var event = Caliper.Events.EventFactory().create(Caliper.Events.GradeEvent, {
         id: id,
         actor: actor,
         action: action,
@@ -628,7 +628,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
         generated: generated
       });
       
-      $scope.currentEventType = 'Outcome Event (GRADED)';
+      $scope.currentEventType = 'GradeEvent (GRADED)';
       $scope.currentEvent = event;
       
       // Send event
