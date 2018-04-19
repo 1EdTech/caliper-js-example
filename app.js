@@ -589,7 +589,7 @@ app.controller('sampleAppCtrl', ['$scope', 'sampleAppSensorService',
       sampleAppSensorService.sendEnvelope(envelope);
     };
     
-    // Exercise 5: add an GradeEvent
+    // Exercise 5: add a GradeEvent
     $scope.gradeQuiz = function() {
       
       // Event identifier
