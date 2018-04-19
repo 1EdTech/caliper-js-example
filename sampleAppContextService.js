@@ -26,10 +26,10 @@
  */
 angular.module('sampleCaliperApp')
   .service('sampleAppContextService', function() {
-
+    
     const BASE_IRI = "https://example.edu";
     const COURSE_IRI = BASE_IRI + "/deptOfPhysics/2017/physics101";
-
+    
     /**
      * Decrement date by n days in order to create faux historical dates for entities.
      * @param date
@@ -39,7 +39,7 @@ angular.module('sampleCaliperApp')
       date.setDate(date.getDate() - decrement);
       return date.toISOString();
     };
-
+    
     /**
      * Increment date by n days in order to create faux future dates for entities
      * @param date
@@ -49,15 +49,15 @@ angular.module('sampleCaliperApp')
       date.setDate(date.getDate() + increment);
       return date.toISOString();
     };
-
+    
     // Get the current user as a Caliper Actor
     var getUser = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Person, {
-        id: "https://www.example.org/cgwhyte",
+        id: "https://www.umich.edu/staff/arwhyte",
         dateCreated: decrementDate(new Date(), 45)
       });
     };
-
+    
     // Get the Syllabus
     var getSyllabus = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Document, {
@@ -68,7 +68,7 @@ angular.module('sampleCaliperApp')
         dateModified: decrementDate(new Date(), 7)
       });
     };
-
+    
     // Get the current Reading
     var getReading = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Document, {
@@ -79,7 +79,7 @@ angular.module('sampleCaliperApp')
         dateModified: decrementDate(new Date(), 7)
       });
     };
-
+    
     var getReadingFrame = function() {
       var reading = getReading();
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Frame, {
@@ -92,7 +92,7 @@ angular.module('sampleCaliperApp')
         dateModified: reading.dateModified
       });
     };
-
+    
     // Get the current edApp
     var getEdApp = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.SoftwareApplication, {
@@ -101,7 +101,7 @@ angular.module('sampleCaliperApp')
         dateCreated: decrementDate(new Date(), 30)
       });
     };
-
+    
     // Get the current Course
     var getCourse = function() {
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.CourseSection, {
@@ -114,12 +114,12 @@ angular.module('sampleCaliperApp')
         dateModified: decrementDate(new Date(), 28)
       });
     };
-
+    
     // Get the membership
     var getMembership = function() {
       var member = getUser();
       var organization = getCourse();
-
+      
       return Caliper.Entities.EntityFactory().create(Caliper.Entities.Membership, {
         id: COURSE_IRI + "/roster/554433",
         description: "Roster entry",
@@ -130,7 +130,7 @@ angular.module('sampleCaliperApp')
         dateCreated: decrementDate(new Date(), 21)
       });
     };
-
+    
     // Get Home Page for current Course
     var getCourseHomePage = function() {
       var course = getCourse();
@@ -142,7 +142,7 @@ angular.module('sampleCaliperApp')
         dateModfied: decrementDate(new Date(), 25)
       });
     };
-
+    
     // Get Quiz Page for current Course
     var getQuizPage = function() {
       var course = getCourse();
@@ -154,7 +154,7 @@ angular.module('sampleCaliperApp')
         dateModified: decrementDate(new Date(), 25)
       });
     };
-
+    
     // Get Quiz
     var getQuiz = function() {
       var course = getCourse();
@@ -174,7 +174,7 @@ angular.module('sampleCaliperApp')
         maxScore: 3.0
       });
     };
-
+    
     // Get Quiz item
     var getQuizItem = function() {
       var quiz = getQuiz();
@@ -189,7 +189,7 @@ angular.module('sampleCaliperApp')
         dateModified: quiz.dateModified
       });
     };
-
+    
     // Export the functions that will be used by other controllers and services
     var exports = {
       getUser: getUser,
@@ -204,6 +204,6 @@ angular.module('sampleCaliperApp')
       getQuiz: getQuiz,
       getQuizItem: getQuizItem
     };
-
+    
     return exports;
   });
