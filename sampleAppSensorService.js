@@ -16,52 +16,60 @@
  * with this program. If not, see http://www.gnu.org/licenses/.
  */
 
-/* 
+/*
  * Sample App Sensor Service
  *
- * This service wraps the caliper-js sensor, enabling any application specific 
+ * This service wraps the caliper-js sensor, enabling any application specific
  * logic to be performed before sending events using the base Javascript sensor
  *
  * @author: Prashant Nayak, Intellify Learning; Anthony Whyte, University of Michigan
  */
 angular.module('sampleCaliperApp')
   .factory('sampleAppSensorService', ['sampleAppContextService', function(sampleAppContextService) {
-
-    // Initialize Caliper sensor with options
+    
+    // Initialize Caliper sensor
     var sensor = Caliper.Sensor;
-
-    // Note that you will have to create a new request bin
-    // by navigating to http://requestb.in/
-    // and replace the "path" setting below with the path 
-    // to your request bin
-    sensor.initialize('http://example.com/sensor/1',{
-      host: 'requestb-in-1h04eq0e08pc.runscope.net',
-      path: '/quu6jzqu', // REPLACE WITH YOUR REQUEST BIN PATH
-      withCredentials: false
-    });
-
-    // Wrapper around Caliper Sensor's send()
-    var send = function(event) {
-
-      // Perform any pre-processing, etc.
-
-      // Send Events using Caliper Sensor
-      sensor.send(event);
+    sensor.initialize("http://example.org/sensors/1");
+    
+    // TAKE HEED: you must uncomment and define the HTTPClient options (endpoint, message headers, etc.)
+    // Example: RequestBin endpoint running in Heroku (Runscope's public version has been disabled due to misuse)
+    /**
+    var options = {
+      uri: 'https://someplace.herokuapp.com/wufdiiwu',
+      withCredentials: false,
+      headers: {
+        "Authorization": "Y2FsaXBlcnYxcDFib290Y2FtcDIwMTc=",
+        "Content-Type": "application/json"
+      },
+      method: "POST"
     };
-
-    // Wrapper around Caliper Sensor's describe()
-    var describe = function(entity) {
-
-      // Perform any pre-processing, etc.
-
-      // Describe Entities using Caliper Sensor
-      sensor.describe(entity);
+    */
+    
+    // Initialize then register HTTP client
+    var client = Caliper.Clients.HttpClient;
+    client.initialize(sensor.id.concat("/clients/1"), options);
+    sensor.registerClient(client);
+    
+    // Wrapper around Caliper Sensor getId()
+    var getId = function() {
+      return sensor.getId();
     };
-
+    
+    // Wrapper around Caliper Sensor createEnvelope()
+    var createEnvelope = function(opts) {
+      return sensor.createEnvelope(opts)
+    };
+    
+    // Wrapper around Caliper Sensor's sendEnvelope()
+    var sendEnvelope = function(envelope) {
+      sensor.sendToClients(envelope);
+    };
+    
     // Export the functions that will be used by controller
     var exports = {
-      describe: describe,
-      send: send,
+      getId: getId,
+      createEnvelope: createEnvelope,
+      sendEnvelope: sendEnvelope,
       currentUser: sampleAppContextService.getUser(),
       syllabus: sampleAppContextService.getSyllabus(),
       reading: sampleAppContextService.getReading(),
@@ -73,6 +81,6 @@ angular.module('sampleCaliperApp')
       quiz: sampleAppContextService.getQuiz(),
       quizPage: sampleAppContextService.getQuizPage()
     };
-
+    
     return exports;
   }]);
