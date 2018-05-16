@@ -6,6 +6,13 @@ provides an implementation of the Caliper SensorAPI™.  The toy application is
 modeled as a simple course delivery app that provides a syllabus, reading to 
 annotate and quiz.
 
+## Branches
+* __master__: stable, deployable branch that stores the official release history.  
+* __develop__: unstable development branch.  Current work that targets a future release is merged to this branch.
+
+## Tags
+*caliper-js* releases are tagged and versioned MAJOR.MINOR.PATCH\[-label\] (e.g., 1.2.0).  Pre-release tags are identified with an extensions label (e.g., "1.2.0-RC01").  The tags are stored in this repository.
+
 ## Prerequisites
 * Familiarity with Javascript
 * Familiarity with AngularJS (or at least an understanding of MVC)
