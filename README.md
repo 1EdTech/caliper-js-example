@@ -11,7 +11,9 @@ annotate and quiz.
 * __develop__: unstable development branch.  Current work that targets a future release is merged to this branch.
 
 ## Tags
-*caliper-js* releases are tagged and versioned MAJOR.MINOR.PATCH\[-label\] (e.g., 1.2.0).  Pre-release tags are identified with an extensions label (e.g., "1.2.0-RC01").  The tags are stored in this repository.
+*caliper-js-example* releases are tagged and versioned MAJOR.MINOR
+.PATCH\[-label\] 
+(e.g., 1.2.0).  Pre-release tags are identified with an extensions label (e.g., "1.2.0-RC01").  The tags are stored in this repository.
 
 ## Prerequisites
 * Familiarity with Javascript
@@ -80,7 +82,7 @@ var options = {
 
 ## Running the Demo
 Run an HTTP server or drop the code into a [Plunker](https://plnkr.co/) 
-instance.  On a Mac or Linux box you can run Python's SimpleHTTServer by 
+instance.  On a Mac or Linux box you can run Python's _SimpleHTTServer_ by 
 executing the following command:
 
 ```
