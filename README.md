@@ -1,10 +1,9 @@
 # IMS Global caliper-js-example sample app
 This is a sample application that utilizes the IMS Global Javascript sensor 
-(caliper-js).  It leverages the IMS Global Caliper information model and 
-caliper-js, a Javascript client for [Caliper](http://www.imsglobal.org) that 
-provides an implementation of the Caliper SensorAPI™.  The toy application is 
-modeled as a simple course delivery app that provides a syllabus, reading to 
-annotate and quiz.
+_caliper-js_, a Javascript client for [Caliper](http://www.imsglobal.org) that 
+provides an implementation of the Caliper SensorAPI™.  This is a toy 
+application modeled as a simple course delivery app that provides a syllabus, 
+reading to annotate and quiz.
 
 ## Branches
 * __master__: stable, deployable branch that stores the official release history.  
