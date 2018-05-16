@@ -1,17 +1,18 @@
 # IMS Global caliper-js-example sample app
 This is a sample application that utilizes the IMS Global Javascript sensor 
-(caliper-js).  It leverages the IMS Global Caliper information model and 
-caliper-js, a Javascript client for [Caliper](http://www.imsglobal.org) that 
-provides an implementation of the Caliper SensorAPI™.  The toy application is 
-modeled as a simple course delivery app that provides a syllabus, reading to 
-annotate and quiz.
+_caliper-js_, a Javascript client for [Caliper](http://www.imsglobal.org) that 
+provides an implementation of the Caliper SensorAPI™.  This is a toy 
+application modeled as a simple course delivery app that provides a syllabus, 
+reading to annotate and quiz.
 
 ## Branches
 * __master__: stable, deployable branch that stores the official release history.  
 * __develop__: unstable development branch.  Current work that targets a future release is merged to this branch.
 
 ## Tags
-*caliper-js* releases are tagged and versioned MAJOR.MINOR.PATCH\[-label\] (e.g., 1.2.0).  Pre-release tags are identified with an extensions label (e.g., "1.2.0-RC01").  The tags are stored in this repository.
+*caliper-js-example* releases are tagged and versioned MAJOR.MINOR
+.PATCH\[-label\] 
+(e.g., 1.2.0).  Pre-release tags are identified with an extensions label (e.g., "1.2.0-RC01").  The tags are stored in this repository.
 
 ## Prerequisites
 * Familiarity with Javascript
@@ -80,7 +81,7 @@ var options = {
 
 ## Running the Demo
 Run an HTTP server or drop the code into a [Plunker](https://plnkr.co/) 
-instance.  On a Mac or Linux box you can run Python's SimpleHTTServer by 
+instance.  On a Mac or Linux box you can run Python's _SimpleHTTServer_ by 
 executing the following command:
 
 ```
