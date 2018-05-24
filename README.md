@@ -1,29 +1,39 @@
 # IMS Global caliper-js-example sample app
 This is a sample application that utilizes the IMS Global Javascript sensor 
-_caliper-js_, a Javascript client for [Caliper](http://www.imsglobal.org) that 
-provides an implementation of the Caliper SensorAPI™.  This is a toy 
-application modeled as a simple course delivery app that provides a syllabus, 
-reading to annotate and quiz.
+*caliper-js*, a Javascript client for [Caliper](http://www.imsglobal.org) that 
+provides an implementation of the Caliper SensorAPI™.  
+
+*caliper-js-example* is a toy application modeled as a simple course delivery app that provides a 
+syllabus, reading to annotate and quiz.
 
 ## Branches
 * __master__: stable, deployable branch that stores the official release history.  
-* __develop__: unstable development branch.  Current work that targets a future release is merged to this branch.
+* __develop__: unstable development branch.  Current work that targets a future release is merged 
+to this branch.
 
 ## Tags
-*caliper-js-example* releases are tagged and versioned MAJOR.MINOR
-.PATCH\[-label\] 
-(e.g., 1.2.0).  Pre-release tags are identified with an extensions label (e.g., "1.2.0-RC01").  The tags are stored in this repository.
+*caliper-js-example* releases are tagged and versioned MAJOR.MINOR.PATCH\[-label\] (e.g., 1.2.0). 
+Pre-release tags are identified with an extensions label (e.g., "1.2.0-RC01"). The tags are stored 
+in this repository.
 
-## Prerequisites
-* Familiarity with Javascript
-* Familiarity with AngularJS (or at least an understanding of MVC)
+## Contributing
+We welcome the posting of issues by non IMS Global Learning Consortium members (e.g., feature 
+requests, bug reports, questions, etc.) but we *do not* accept contributions in the form of pull 
+requests from non-members. See [CONTRIBUTING.md](./CONTRIBUTING.md) for more 
+information.
+
+## Getting started
+1. *Read* the [Caliper Analytics&reg; Specification](https://www.imsglobal.org/caliper/v1p1/caliper-spec-v1p1).  
+2. Fork the IMS Global *caliper-js-example* project to your Github account and clone your copy to a 
+local development machine.
+3. *caliper-js-example* assumes familiarity both with Javascript and AngularJS (or at least an 
+understanding of MVC).
 
 ## Creating a Test Endpoint
-One option is to use Runscope's [RequestBin](https://github.com/Runscope/requestbin/blob/master/README.md).
-Previously Runscope provided a public version of the service but has since 
-discontinued it due to "ongoing abuse".  However, one can set up a 
-self-hosted instance of RequestBin using Heroku.  If you use a Mac, do 
-the following:
+Establishing a test endpoint is your responsibility.  One option is to use Runscope's [RequestBin]
+(https://github.com/Runscope/requestbin/blob/master/README.md). Previously Runscope provided a 
+public version of the service but has since discontinued it due to "ongoing abuse".  However, one 
+can set up a self-hosted instance of RequestBin using Heroku.  If you use a Mac, do the following:
 
 1. Sign up for a free Heroku [account](https://signup.heroku.com/).
 2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
@@ -64,7 +74,7 @@ RequestBin instance:
     ```
 
 ## Provide HTTP Request Header Field Values
-In caliper-js-example's _sampleAppContextService.js_ uncomment the 
+In _sampleAppContextService.js_ uncomment the 
 `options` variable and define, minimally, the endpoint `uri` value.
 
 ```
@@ -88,12 +98,14 @@ executing the following command:
 $ python -m SimpleHTTPServer 9999
 ```
 
-Then in a web browser, navigate to http://localhost:9999/index.html.  Remember 
-to enable CORS in the browser before running the demo.
+Then in a web browser, navigate to http://localhost:9999/index.html.  
+
+*Remember to enable CORS in the browser before running the demo.*
 
 ## License
-This project is licensed under the terms of the GNU Lesser General Public 
-License (LGPL), version 3.  See the [LICENSE](./LICENSE) file for details.
+This project is licensed under the terms of the GNU Lesser General Public License (LGPL), version 3. 
+See the [LICENSE](./LICENSE) file for details. For additional information on licensing options for 
+IMS members, please see the [NOTICE](./NOTICE.md) file.
 
 ©2018 IMS Global Learning Consortium, Inc. All Rights Reserved.
 Trademark Information - http://www.imsglobal.org/copyright.html
